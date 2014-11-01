@@ -55,24 +55,4 @@ abstract class StripeObject[A <: StripeObject[_]](underlyingData: JValue) {
 
   protected def mapValueFor(transformer: (JValue)=>JValue) =
     valueFor[Map[String, String]](transformer)
-
-
-  // Not quite ready to be used yet.
-  protected def accessorsImpl(fieldData: Map[String, Type])(c: Context) = {
-    import c.universe._
-    val methodDefs = ListBuffer[DefDef]()
-
-    for ( (fieldName, fieldType) <- fieldData ) {
-      val methodName = camelifyMethod(fieldName)
-      val typeCasted: c.universe.Type = fieldType.asInstanceOf[c.universe.Type]
-
-      methodDefs += DefDef(Modifiers(), newTermName(methodName), Nil, Nil, TypeTree(typeCasted),
-        Apply(
-          TypeApply(Ident("valueFor"), TypeTree(typeCasted) :: Nil),
-          List(
-            c.parse(s"_ \ $fieldName")
-          )
-        ))
-    }
-  }
 }

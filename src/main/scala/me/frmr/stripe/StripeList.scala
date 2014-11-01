@@ -7,3 +7,7 @@ case class StripeList[T](
   totalCount: Option[Int] = None,
   url: String = ""
 )
+
+object StripeList {
+  implicit def toStripeList[T](data: List[T]) = StripeList[T](data = data)
+}

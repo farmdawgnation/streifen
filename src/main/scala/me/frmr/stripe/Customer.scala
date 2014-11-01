@@ -2,6 +2,7 @@ package me.frmr.stripe
 
 import net.liftweb.json._
   import JsonDSL._
+  import Extraction._
 import net.liftweb.util.Helpers._
 
 /**
@@ -10,6 +11,7 @@ import net.liftweb.util.Helpers._
 **/
 class Customer(underlyingData: JValue) extends StripeObject(underlyingData) {
   def id = stringValueFor(_ \ "id")
+  def livemode = booleanValueFor(_ \ "livemode")
   def created = longValueFor(_ \ "created")
   def accountBalance = intValueFor(_ \ "account_balance")
   def currency = stringValueFor(_ \ "currency")
@@ -19,18 +21,20 @@ class Customer(underlyingData: JValue) extends StripeObject(underlyingData) {
   def email = stringValueFor(_ \ "email")
   def metadata = mapValueFor(_ \ "metadata")
 
-  def cards = valueFor[List[Card]](_ \ "cards")
+  def cards = valueFor[StripeList[Card]](_ \ "cards")
   def discount = valueFor[Discount](_ \ "discount")
-  def subscriptions = valueFor[List[Subscription]](_ \ "subscriptions")
+  def subscriptions = valueFor[StripeList[Subscription]](_ \ "subscriptions")
 }
 
 /**
  * Helper object for working with Customers.
 **/
 object Customer {
+  implicit val formats = DefaultFormats
+
   def apply(
     id: Option[String] = None,
-    cards: List[Card] = Nil,
+    cards: StripeList[Card] = Nil,
     created: Option[Long] = None,
     accountBalance: Option[Int] = None,
     currency: Option[String] = None,
@@ -40,7 +44,7 @@ object Customer {
     discount: Option[Discount] = None,
     email: Option[String] = None,
     metadata: Map[String, String] = Map.empty,
-    subscriptions: List[Subscription] = Nil
+    subscriptions: StripeList[Subscription] = Nil
   ) = {
     new Customer(
       ("id" -> id) ~
@@ -51,10 +55,10 @@ object Customer {
       ("delinquent" -> delinquent) ~
       ("description" -> description) ~
       ("email" -> email) ~
-      ("metadata" -> metadata) /*~
+      ("metadata" -> metadata) ~
       ("cards" -> decompose(cards)) ~
       ("discount" -> decompose(discount)) ~
-      ("subscriptions" -> decompose(subscriptions))*/
+      ("subscriptions" -> decompose(subscriptions))
     )
   }
 }

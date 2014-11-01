@@ -18,6 +18,10 @@ class Customer(underlyingData: JValue) extends StripeObject(underlyingData) {
   def description = stringValueFor(_ \ "description")
   def email = stringValueFor(_ \ "email")
   def metadata = mapValueFor(_ \ "metadata")
+
+  def cards = valueFor[List[Card]](_ \ "cards")
+  def discount = valueFor[Discount](_ \ "discount")
+  def subscriptions = valueFor[List[Subscription]](_ \ "subscriptions")
 }
 
 /**
@@ -26,17 +30,17 @@ class Customer(underlyingData: JValue) extends StripeObject(underlyingData) {
 object Customer {
   def apply(
     id: Option[String] = None,
-    /* cards: List[Card] = Nil */
+    cards: List[Card] = Nil,
     created: Option[Long] = None,
     accountBalance: Option[Int] = None,
     currency: Option[String] = None,
     defaultCard: Option[String] = None,
     delinquent: Option[String] = None,
     description: Option[String] = None,
-    /* discount: Option[Discount] = None */
+    discount: Option[Discount] = None,
     email: Option[String] = None,
-    metadata: Map[String, String] = Map.empty
-    /* subscriptions: List[Subscription] */
+    metadata: Map[String, String] = Map.empty,
+    subscriptions: List[Subscription] = Nil
   ) = {
     new Customer(
       ("id" -> id) ~
@@ -47,7 +51,10 @@ object Customer {
       ("delinquent" -> delinquent) ~
       ("description" -> description) ~
       ("email" -> email) ~
-      ("metadata" -> metadata)
+      ("metadata" -> metadata) /*~
+      ("cards" -> decompose(cards)) ~
+      ("discount" -> decompose(discount)) ~
+      ("subscriptions" -> decompose(subscriptions))*/
     )
   }
 }

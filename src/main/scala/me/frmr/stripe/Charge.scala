@@ -12,7 +12,7 @@ case class ChargeShipping(address: ChargeShippingAddress, name: String, phone: S
  * Implementation of the Charge data structure in
  * Stripe's API. See https://stripe.com/docs/api#charge_object
 **/
-class Charge(underlyingData: JValue) extends StripeObject[Charge](underlyingData) {
+class Charge(underlyingData: JValue) extends StripeObject(underlyingData) {
   def id = stringValueFor(_ \ "id")
   def amount = longValueFor(_ \ "amount")
   def captured = booleanValueFor(_ \ "captured")

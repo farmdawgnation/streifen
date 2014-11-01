@@ -11,9 +11,7 @@ import scala.collection.mutable.ListBuffer
  * The common ancestor of any class that represents a Stripe
  * data structure.
 **/
-abstract class StripeObject[A <: StripeObject[_]](underlyingData: JValue) {
-  self: A =>
-
+abstract class StripeObject(underlyingData: JValue) {
   /**
    * Return the raw JSON AST representation of the Stripe
    * data structure this class represents. Use this only if the

@@ -8,7 +8,7 @@ import net.liftweb.util.Helpers._
  * Implementation of the Customer data structure in
  * Stripe's API. See https://stripe.com/docs/api#customer_object
 **/
-class Customer(underlyingData: JValue) extends StripeObject[Customer](underlyingData) {
+class Customer(underlyingData: JValue) extends StripeObject(underlyingData) {
   def id = stringValueFor(_ \ "id")
   def created = longValueFor(_ \ "created")
   def accountBalance = intValueFor(_ \ "account_balance")

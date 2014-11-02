@@ -13,17 +13,17 @@ class Customer(underlyingData: JValue) extends StripeObject(underlyingData) {
   def id = stringValueFor(_ \ "id")
   def livemode = booleanValueFor(_ \ "livemode")
   def created = longValueFor(_ \ "created")
-  def accountBalance = intValueFor(_ \ "account_balance")
+  def accountBalance = intValueFor(_ \ "accountBalance")
   def currency = stringValueFor(_ \ "currency")
-  def defaultCard = stringValueFor(_ \ "default_card")
+  def defaultCard = stringValueFor(_ \ "defaultCard")
   def delinquent = booleanValueFor(_ \ "delinquent")
   def description = stringValueFor(_ \ "description")
   def email = stringValueFor(_ \ "email")
   def metadata = mapValueFor(_ \ "metadata")
 
-  def cards = valueFor[StripeList[Card]](_ \ "cards")
+  def cards = valueFor[CardList](_ \ "cards")
   def discount = valueFor[Discount](_ \ "discount")
-  def subscriptions = valueFor[StripeList[Subscription]](_ \ "subscriptions")
+  def subscriptions = valueFor[SubscriptionList](_ \ "subscriptions")
 }
 
 /**
@@ -34,7 +34,7 @@ object Customer {
 
   def apply(
     id: Option[String] = None,
-    cards: StripeList[Card] = Nil,
+    cards: Option[CardList] = None,
     created: Option[Long] = None,
     accountBalance: Option[Int] = None,
     currency: Option[String] = None,
@@ -44,7 +44,7 @@ object Customer {
     discount: Option[Discount] = None,
     email: Option[String] = None,
     metadata: Map[String, String] = Map.empty,
-    subscriptions: StripeList[Subscription] = Nil
+    subscriptions: Option[SubscriptionList] = None
   ) = {
     new Customer(
       ("id" -> id) ~

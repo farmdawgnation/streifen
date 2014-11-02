@@ -1,5 +1,6 @@
 package me.frmr.stripe
 
+import net.liftweb.common._
 import net.liftweb.json._
 import net.liftweb.util.Helpers._
 
@@ -21,7 +22,13 @@ abstract class StripeObject(underlyingData: JValue) {
    * I'll try really hard to make sure that doesn't happen too
    * often, but no guarantees. :)
   **/
-  def raw = underlyingData
+  def raw = underlyingData.map {
+    case JField(fieldName, value) =>
+      JField(camelifyMethod(fieldName), value)
+
+    case x =>
+      x
+  }
 
   implicit val formats = DefaultFormats
 

@@ -1,13 +1,30 @@
 package me.frmr.stripe
 
-case class StripeList[T](
-  `object`: String = "list",
-  data: List[T] = Nil,
+import net.liftweb.json._
+  import Serialization._
+  import JsonDSL._
+  import Extraction._
+
+import java.util.Arrays
+import scala.collection.JavaConversions._
+
+trait StripeList[T] {
+  val data: List[T]
+  val hasMore: Boolean
+  val totalCount: Option[Int]
+  val url: String
+}
+
+case class CardList(
+  data: List[Card],
   hasMore: Boolean = false,
   totalCount: Option[Int] = None,
   url: String = ""
-)
+) extends StripeList[Card]
 
-object StripeList {
-  implicit def toStripeList[T](data: List[T]) = StripeList[T](data = data)
-}
+case class SubscriptionList(
+  data: List[Card],
+  hasMore: Boolean = false,
+  totalCount: Option[Int] = None,
+  url: String = ""
+) extends StripeList[Card]

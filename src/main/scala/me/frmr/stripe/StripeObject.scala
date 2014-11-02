@@ -36,8 +36,16 @@ abstract class StripeObject(underlyingData: JValue) {
    * @param transformer The function that transforms the original data into the structure containing the data we want.
    * @return A Full[T] if the extraction was successful, a Failure otherwise.
   **/
-  protected def valueFor[T](transformer: (JValue)=>JValue)(implicit mf: Manifest[T]) =
-    tryo(transformer(underlyingData).extract[T])
+  protected def valueFor[T](transformer: (JValue)=>JValue)(implicit mf: Manifest[T]) = {
+    val result = tryo(transformer(raw).extract[T](formats, mf)).filterNot(_ == null)
+
+    result match {
+      case Failure(_, Full(exception), _) => exception.printStackTrace
+      case _ =>
+    }
+
+    result
+  }
 
   protected def stringValueFor(transformer: (JValue)=>JValue) =
     valueFor[String](transformer)

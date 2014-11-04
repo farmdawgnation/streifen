@@ -4,9 +4,7 @@ version := "0.0.1-SNAPSHOT"
 
 organization := "me.frmr.stripe"
 
-scalaVersion := "2.10.4"
-
-crossScalaVersions := Seq("2.10.4", "2.11.2")
+scalaVersion := "2.11.2"
 
 libraryDependencies ++= {
   val liftVersion = "2.6-RC1"

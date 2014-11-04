@@ -23,8 +23,15 @@ case class CardList(
 ) extends StripeList[Card]
 
 case class SubscriptionList(
-  data: List[Card],
+  data: List[Subscription],
   hasMore: Boolean = false,
   totalCount: Option[Int] = None,
   url: String = ""
-) extends StripeList[Card]
+) extends StripeList[Subscription]
+
+case class RefundList(
+  data: List[Refund],
+  hasMore: Boolean = false,
+  totalCount: Option[Int] = None,
+  url: String = ""
+) extends StripeList[Refund]

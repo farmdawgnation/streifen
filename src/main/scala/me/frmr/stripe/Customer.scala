@@ -24,4 +24,4 @@ case class Customer(
   metadata: Map[String, String] = Map.empty,
   subscriptions: Option[SubscriptionList] = None,
   raw: Option[JValue] = None
-)
+) extends StripeObject

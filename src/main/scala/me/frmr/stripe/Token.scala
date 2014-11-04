@@ -4,4 +4,4 @@ import net.liftweb.json._
   import JsonDSL._
 import net.liftweb.util.Helpers._
 
-class Token(underlyingData: JValue) extends StripeObject(underlyingData)
+class Token(underlyingData: JValue)

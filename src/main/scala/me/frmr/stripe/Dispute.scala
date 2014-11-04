@@ -4,4 +4,4 @@ import net.liftweb.json._
   import JsonDSL._
 import net.liftweb.util.Helpers._
 
-class Dispute(underlyingData: JValue) extends StripeObject(underlyingData)
+class Dispute(underlyingData: JValue)

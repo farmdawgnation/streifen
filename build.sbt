@@ -9,9 +9,11 @@ scalaVersion := "2.11.2"
 libraryDependencies ++= {
   val liftVersion = "2.6-RC1"
   Seq(
-    "net.liftweb"     %% "lift-common"  % liftVersion,
-    "net.liftweb"     %% "lift-util"    % liftVersion,
-    "net.liftweb"     %% "lift-json"    % liftVersion,
-    "org.scalatest"   %% "scalatest"    % "2.2.1"        % "test"
+    "net.liftweb"               %% "lift-common"          % liftVersion,
+    "net.liftweb"               %% "lift-util"            % liftVersion,
+    "net.liftweb"               %% "lift-json"            % liftVersion,
+    "net.databinder.dispatch"   %% "dispatch-core"        % "0.11.2",
+    "net.databinder.dispatch"   %% "dispatch-lift-json"   % "0.11.2",
+    "org.scalatest"             %% "scalatest"            % "2.2.1"        % "test"
   )
 }

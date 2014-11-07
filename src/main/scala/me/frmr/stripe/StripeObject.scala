@@ -41,3 +41,17 @@ abstract class StripeObject {
   def valueFor[T](transformer: (JValue)=>JValue)(implicit mf: Manifest[T]) =
     tryo(transformer(raw.getOrElse(JNothing)).extract[T](formats, mf)).filterNot(_ == null)
 }
+
+/**
+ * The base trait for the implementation of meta objects used for communicating
+ * with Stripe's servers.
+**/
+trait StripeMeta[T <: StripeObject] {
+
+}
+
+trait Gettable
+trait Creatable
+trait Listable
+trait Updateable
+trait Deleteable

@@ -38,7 +38,7 @@ object Customer extends Listable[CustomerList] with Gettable[Customer] with Dele
     coupon: Option[String] = None,
     description: Option[String] = None,
     email: Option[String] = None,
-    metadata: Option[Map[String, String]] = None,
+    metadata: Map[String, String] = Map.empty,
     plan: Option[String] = None,
     quantity: Option[Int] = None,
     trialEnd: Option[Long] = None
@@ -49,12 +49,33 @@ object Customer extends Listable[CustomerList] with Gettable[Customer] with Dele
       coupon.map(("coupon", _)),
       description.map(("description", _)),
       email.map(("email", _)),
-      //metadata.map(metadata => ("metadata", metadata)),
       plan.map(("plan", _)),
       quantity.map(quantity => ("quantity", quantity.toString)),
       trialEnd.map(trialEnd => ("trialEnd", trialEnd.toString))
-    ).flatten.toMap
+    ).flatten.toMap ++ metadataProcessor(metadata)
 
     exec.executeFor[Customer](baseResourceCalculator(exec.baseReq) << params)
+  }
+
+  def update(
+    id: String,
+    accountBalance: Option[String] = None,
+    card: Option[String] = None,
+    defaultCard: Option[String] = None,
+    coupon: Option[String] = None,
+    description: Option[String] = None,
+    email: Option[String] = None,
+    metadata: Map[String, String] = Map.empty
+  )(implicit exec: StripeExecutor): Future[Box[Customer]] = {
+    val params = List(
+      accountBalance.map(("account_balance", _)),
+      card.map(("card", _)),
+      coupon.map(("coupon", _)),
+      defaultCard.map(("default_card", _)),
+      description.map(("description", _)),
+      email.map(("email", _))
+    ).flatten.toMap ++ metadataProcessor(metadata)
+
+    exec.executeFor[Customer](baseResourceCalculator(exec.baseReq) / id << params)
   }
 }

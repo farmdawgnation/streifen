@@ -20,6 +20,13 @@ trait StripeMeta {
    * of resource this is.
   **/
   def baseResourceCalculator(request: Req): Req
+
+  def metadataProcessor(metadata: Map[String, String]) = {
+    metadata.map({
+      case (key, value) =>
+        (s"metadata[$key]", value)
+    })
+  }
 }
 
 trait Gettable[T <: StripeObject] extends StripeMeta {

@@ -35,3 +35,10 @@ case class RefundList(
   totalCount: Option[Int] = None,
   url: String = ""
 ) extends StripeList[Refund]
+
+case class CustomerList(
+  data: List[Customer],
+  hasMore: Boolean = false,
+  totalCount: Option[Int] = None,
+  url: String = ""
+) extends StripeList[Customer]

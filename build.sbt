@@ -17,3 +17,9 @@ libraryDependencies ++= {
     "org.scalatest"             %% "scalatest"            % "2.2.1"        % "test"
   )
 }
+
+initialCommands := """
+import me.frmr.stripe._
+import scala.concurrent._
+import scala.concurrent.duration._
+"""

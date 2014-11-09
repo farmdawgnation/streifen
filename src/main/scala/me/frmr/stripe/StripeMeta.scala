@@ -53,7 +53,7 @@ trait Deleteable extends StripeMeta {
  * The base class for all singletons that will facilitate communication
  * with Stripe on behalf of the child-level model objects.
 **/
-trait ChildStripeMeta[T <: StripeObject] {
+trait ChildStripeMeta {
   implicit val formats = DefaultFormats
 
   /**
@@ -61,4 +61,24 @@ trait ChildStripeMeta[T <: StripeObject] {
    * of resource this is.
   **/
   def baseResourceCalculator(request: Req, parentId: String): Req
+}
+
+trait ChildGettable[T <: StripeObject] extends ChildStripeMeta {
+  def get(parentId: String, id: String)(implicit exec: StripeExecutor, mf: Manifest[T]): Future[Box[T]] = {
+    val getReq = baseResourceCalculator(exec.baseReq, parentId) / id
+    exec.executeFor[T](getReq)
+  }
+}
+
+abstract class ChildListable[Z <: StripeList[_]](implicit mf: Manifest[Z]) extends ChildStripeMeta {
+  def list(parentId: String)(implicit exec: StripeExecutor): Future[Box[Z]] = {
+    exec.executeFor[Z](baseResourceCalculator(exec.baseReq, parentId: String))
+  }
+}
+
+trait ChildDeleteable extends ChildStripeMeta {
+  def delete(parentId: String, id: String)(implicit exec: StripeExecutor): Future[Box[DeleteResponse]] = {
+    val deleteReq = (baseResourceCalculator(exec.baseReq, parentId) / id).DELETE
+    exec.executeFor[DeleteResponse](deleteReq)
+  }
 }

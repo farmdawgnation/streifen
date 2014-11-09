@@ -73,6 +73,15 @@ object Subscription extends ChildListable[SubscriptionList] with ChildGettable[S
       applicationFeePercent.map(fee => ("application_fee_percent", fee.toString))
     ).flatten.toMap ++ metadataProcessor(metadata)
 
-    exec.executeFor[Subscription](baseResourceCalculator(exec.baseReq, customerId) / subscriptionId << params)
+    exec.executeFor[Subscription](
+      baseResourceCalculator(exec.baseReq, customerId) / subscriptionId << params
+    )
+  }
+
+  def cancel(customerId: String, subscriptionId: String, atPeriodEnd: Boolean = false)(implicit exec: StripeExecutor) = {
+    val params = Map("at_period_end" -> atPeriodEnd.toString)
+    exec.executeFor[Subscription](
+      (baseResourceCalculator(exec.baseReq, customerId) / subscriptionId << params).DELETE
+    )
   }
 }

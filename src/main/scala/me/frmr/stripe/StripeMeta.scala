@@ -61,6 +61,13 @@ trait ChildStripeMeta {
    * of resource this is.
   **/
   def baseResourceCalculator(request: Req, parentId: String): Req
+
+  def metadataProcessor(metadata: Map[String, String]) = {
+    metadata.map({
+      case (key, value) =>
+        (s"metadata[$key]", value)
+    })
+  }
 }
 
 trait ChildGettable[T <: StripeObject] extends ChildStripeMeta {

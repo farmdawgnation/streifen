@@ -36,6 +36,13 @@ case class RefundList(
   url: String = ""
 ) extends StripeList[Refund]
 
+case class ApplicationFeeList(
+  data: List[ApplicationFee],
+  hasMore: Boolean = false,
+  totalCount: Option[Int] = None,
+  url: String = ""
+) extends StripeList[ApplicationFee]
+
 case class ApplicationFeeRefundList(
   data: List[ApplicationFeeRefund],
   hasMore: Boolean = false,

@@ -63,3 +63,10 @@ case class RecipientList(
   totalCount: Option[Int] = None,
   url: String = ""
 ) extends StripeList[Recipient]
+
+case class TransferList(
+  data: List[Transfer],
+  hasMore: Boolean = false,
+  totalCount: Option[Int] = None,
+  url: String = ""
+) extends StripeList[Transfer]

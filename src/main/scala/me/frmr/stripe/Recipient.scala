@@ -8,17 +8,6 @@ import net.liftweb.util.Helpers._
 
 import dispatch._, Defaults._
 
-case class ActiveAccount(
-  id: String,
-  country: String,
-  currency: String,
-  defaultForCurrency: Boolean,
-  last4: String,
-  status: String,
-  bankName: Option[String],
-  fingerprint: Option[String]
-)
-
 case class Recipient(
   id: String,
   created: Long,
@@ -28,7 +17,7 @@ case class Recipient(
   email: Option[String],
   name: String,
   verified: Boolean,
-  activeAccount: Option[ActiveAccount],
+  activeAccount: Option[BankAccount],
   cards: CardList,
   defaultCard: Option[String],
   raw: Option[JValue] = None
@@ -46,7 +35,7 @@ object Recipient extends Listable[RecipientList] with Gettable[Recipient] with D
     email: Option[String] = None,
     description: Option[String] = None,
     metadata: Map[String, String] = Map.empty
-  )(implicit exec: StripeExecutor) {
+  )(implicit exec: StripeExecutor) = {
     val requiredParams = Map(
       "name" -> name,
       "type" -> `type`
@@ -74,7 +63,7 @@ object Recipient extends Listable[RecipientList] with Gettable[Recipient] with D
     email: Option[String] = None,
     description: Option[String] = None,
     metadata: Map[String, String] = Map.empty
-  )(implicit exec: StripeExecutor) {
+  )(implicit exec: StripeExecutor) = {
     val optionalParams = List(
       name.map(("name", _)),
       taxId.map(("tax_id", _)),

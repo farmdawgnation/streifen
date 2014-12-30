@@ -41,13 +41,13 @@ class CardSpec extends WordSpec with ShouldMatchers {
 
       val testCard = camelifyFieldNames(parse(exampleCardJson)).extract[Card]
 
-      testCard.id.get should equal("card_14uxPs2eZvKYlo2CzgxT7pbv")
-      testCard.last4.get should equal("4242")
-      testCard.brand.get should equal("Visa")
-      testCard.funding.get should equal("credit")
-      testCard.expMonth.get should equal(1)
-      testCard.expYear.get should equal(2050)
-      testCard.fingerprint.get should equal("Xt5EWLLDS7FJjR1c")
+      testCard.id should equal("card_14uxPs2eZvKYlo2CzgxT7pbv")
+      testCard.last4 should equal("4242")
+      testCard.brand should equal("Visa")
+      testCard.funding should equal("credit")
+      testCard.expMonth should equal(1)
+      testCard.expYear should equal(2050)
+      testCard.fingerprint should equal("Xt5EWLLDS7FJjR1c")
       testCard.country.get should equal("US")
       testCard.cvcCheck.get should equal("pass")
     }

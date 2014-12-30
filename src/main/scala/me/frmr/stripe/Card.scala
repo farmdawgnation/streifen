@@ -9,13 +9,13 @@ import net.liftweb.util.Helpers._
  * Stripe's API. See https://stripe.com/docs/api#card_object
 **/
 case class Card(
-  id: Option[String] = None,
-  brand: Option[String] = None,
-  expMonth: Option[Int] = None,
-  expYear: Option[Int] = None,
-  fingerprint: Option[String] = None,
-  funding: Option[String] = None,
-  last4: Option[String] = None,
+  id: String,
+  brand: String,
+  expMonth: Int,
+  expYear: Int,
+  fingerprint: String,
+  funding: String,
+  last4: String,
   addressCity: Option[String] = None,
   addressCountry: Option[String] = None,
   addressLine1: Option[String] = None,

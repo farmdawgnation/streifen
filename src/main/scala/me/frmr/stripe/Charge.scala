@@ -1,9 +1,12 @@
 package me.frmr.stripe
 
+import net.liftweb.common._
 import net.liftweb.json._
   import JsonDSL._
   import Extraction._
 import net.liftweb.util.Helpers._
+
+import dispatch._, Defaults._
 
 case class ChargeShippingAddress(line1: String, city: String, country: String, line2: String,
                                   postalCode: String, state: String)
@@ -40,3 +43,76 @@ case class Charge(
   raw: Option[JValue] = None
 ) extends StripeObject
 
+object Charge extends Listable[ChargeList] with Gettable[Charge] {
+  def baseResourceCalculator(req: Req) = req / "charges"
+
+  def create(
+    amount: Long,
+    currency: String,
+    customer: Option[String] = None,
+    card: Option[String] = None,
+    description: Option[String] = None,
+    capture: Option[Boolean] = None,
+    statementDescription: Option[String] = None,
+    receiptEmail: Option[String] = None,
+    applicationFee: Option[Long] = None,
+    metadata: Map[String, String] = Map.empty
+  )(implicit exec: StripeExecutor) = {
+    (customer, card) match {
+      case (None, None) =>
+        Failure("Either card or customer must be specified when creating a charge.")
+
+      case _ =>
+        val requiredParams = Map(
+          "amount" -> amount.toString,
+          "currency" -> currency
+        )
+
+        val optionalParams = List(
+          customer.map(("customer", _)),
+          card.map(("card", _)),
+          description.map(("description", _)),
+          capture.map(c => ("capture", c.toString)),
+          statementDescription.map(("statement_description", _)),
+          receiptEmail.map(("receipt_email", _)),
+          applicationFee.map(a => ("application_fee", a.toString))
+        ).flatten.toMap
+
+        val params = requiredParams ++ optionalParams ++ metadataProcessor(metadata)
+
+        exec.executeFor[Charge](baseResourceCalculator(exec.baseReq) << params)
+    }
+  }
+
+  def update(
+    id: String,
+    description: Option[String] = None,
+    fraudDetails: Map[String, String] = Map.empty,
+    metadata: Map[String, String] = Map.empty
+  )(implicit exec: StripeExecutor) = {
+    val params =
+      List(description.map(("description", _))).flatten.toMap ++
+      metadataProcessor(metadata) ++
+      fraudDetails.map({
+        case (key, value) =>
+          (s"fraud_details[$key]", value)
+      })
+
+    exec.executeFor[Charge](baseResourceCalculator(exec.baseReq) / id << params)
+  }
+
+  def capture(
+    id: String,
+    amount: Option[Long] = None,
+    applicationFee: Option[Long] = None,
+    receiptEmail: Option[String] = None
+  )(implicit exec: StripeExecutor) = {
+    val params = List(
+      amount.map(a => ("amount", a.toString)),
+      applicationFee.map(a => ("application_fee", a.toString)),
+      receiptEmail.map(("receipt_email", _))
+    ).flatten.toMap
+
+    exec.executeFor[Charge](baseResourceCalculator(exec.baseReq) / id / "capture" << params)
+  }
+}

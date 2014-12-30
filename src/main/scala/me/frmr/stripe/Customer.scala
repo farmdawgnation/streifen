@@ -13,19 +13,19 @@ import dispatch._, Defaults._
  * Stripe's API. See https://stripe.com/docs/api#customer_object
 **/
 case class Customer(
-  id: Option[String] = None,
-  livemode: Option[Boolean] = None,
-  cards: Option[CardList] = None,
-  created: Option[Long] = None,
-  accountBalance: Option[Int] = None,
-  currency: Option[String] = None,
-  defaultCard: Option[String] = None,
-  delinquent: Option[Boolean] = None,
-  description: Option[String] = None,
-  discount: Option[Discount] = None,
-  email: Option[String] = None,
-  metadata: Map[String, String] = Map.empty,
-  subscriptions: Option[SubscriptionList] = None,
+  id: String,
+  livemode: Boolean,
+  cards: CardList,
+  created: Long,
+  accountBalance: Long,
+  currency: String,
+  delinquent: Boolean,
+  defaultCard: Option[String],
+  description: Option[String],
+  discount: Option[Discount],
+  email: Option[String],
+  metadata: Map[String, String],
+  subscriptions: Option[SubscriptionList],
   raw: Option[JValue] = None
 ) extends StripeObject
 

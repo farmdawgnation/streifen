@@ -73,13 +73,13 @@ class CustomerSpec extends WordSpec with ShouldMatchers {
 
       val testCustomer = camelifyFieldNames(parse(exampleCustomerJson)).extract[Customer]
 
-      testCustomer.id.get should equal("cus_54DocayG4yRrNK")
-      testCustomer.livemode.get should equal(false)
-      testCustomer.created.get should equal(1414861702)
-      testCustomer.accountBalance.get should equal(0)
-      testCustomer.currency.get should equal("usd")
+      testCustomer.id should equal("cus_54DocayG4yRrNK")
+      testCustomer.livemode should equal(false)
+      testCustomer.created should equal(1414861702)
+      testCustomer.accountBalance should equal(0)
+      testCustomer.currency should equal("usd")
       testCustomer.defaultCard.get should equal("card_14u5MP2eZvKYlo2CIukHVUb4")
-      testCustomer.delinquent.get should equal(false)
+      testCustomer.delinquent should equal(false)
       testCustomer.description.get should equal("nkajok@coolfiresolutions.com")
       testCustomer.email should equal(None)
       testCustomer.metadata should equal(Map.empty)

@@ -78,4 +78,9 @@ object Customer extends Listable[CustomerList] with Gettable[Customer] with Dele
 
     exec.executeFor[Customer](baseResourceCalculator(exec.baseReq) / id << params)
   }
+
+  def deleteDiscount(customerId: String)(implicit exec: StripeExecutor) = {
+    val deleteReq = (baseResourceCalculator(exec.baseReq) / customerId / "discount").DELETE
+    exec.executeFor[DeleteResponse](deleteReq)
+  }
 }

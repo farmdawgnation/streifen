@@ -84,4 +84,9 @@ object Subscription extends ChildListable[SubscriptionList] with ChildGettable[S
       (baseResourceCalculator(exec.baseReq, customerId) / subscriptionId << params).DELETE
     )
   }
+
+  def deleteDiscount(customerId: String, subscriptionId: String)(implicit exec: StripeExecutor) = {
+    val deleteReq = (baseResourceCalculator(exec.baseReq, customerId) / subscriptionId).DELETE
+    exec.executeFor[DeleteResponse](deleteReq)
+  }
 }

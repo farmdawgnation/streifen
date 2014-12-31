@@ -77,3 +77,10 @@ case class ChargeList(
   totalCount: Option[Int] = None,
   url: String = ""
 ) extends StripeList[Charge]
+
+case class PlanList(
+  data: List[Plan],
+  hasMore: Boolean = false,
+  totalCount: Option[Int] = None,
+  url: String = ""
+) extends StripeList[Plan]

@@ -42,7 +42,7 @@ object AsStripeResponse extends (Response=>StripeResponse) {
  * }
  * }}}
 **/
-class StripeExecutor(apiKey: String) {
+class StripeExecutor(apiKey: String, includeRaw: Boolean = false) {
   val httpExecutor = new Http()
   val baseReq = url("https://api.stripe.com/v1").secure.as(apiKey, "")
   implicit val formats = DefaultFormats
@@ -65,13 +65,17 @@ class StripeExecutor(apiKey: String) {
       Failure(s"Unexpected $code") ~> json
   }
 
-  def executeFor[T](request: Req)(implicit mf: Manifest[T]): Future[Box[T]] = {
+  def executeFor[T <: StripeObject](request: Req)(implicit mf: Manifest[T]): Future[Box[T]] = {
     execute(request).map { futureBox =>
       for {
         stripeResponse <- futureBox
         concreteObject <- handler(mf)(stripeResponse)
       } yield {
-        concreteObject
+        if (includeRaw) {
+          concreteObject.withRaw(stripeResponse.json).asInstanceOf[T]
+        } else {
+          concreteObject
+        }
       }
     }
   }

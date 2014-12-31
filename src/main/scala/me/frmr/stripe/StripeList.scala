@@ -112,3 +112,10 @@ case class InvoiceItemList(
   totalCount: Option[Int] = None,
   url: String = ""
 ) extends StripeList[InvoiceItem]
+
+case class EventList(
+  data: List[Event],
+  hasMore: Boolean = false,
+  totalCount: Option[Int] = None,
+  url: String = ""
+) extends StripeList[Event]

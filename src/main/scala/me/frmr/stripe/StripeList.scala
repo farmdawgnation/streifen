@@ -105,3 +105,10 @@ case class InvoiceList(
   totalCount: Option[Int] = None,
   url: String = ""
 ) extends StripeList[Invoice]
+
+case class InvoiceItemList(
+  data: List[InvoiceItem],
+  hasMore: Boolean = false,
+  totalCount: Option[Int] = None,
+  url: String = ""
+) extends StripeList[InvoiceItem]

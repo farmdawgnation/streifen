@@ -91,3 +91,17 @@ case class CouponList(
   totalCount: Option[Int] = None,
   url: String = ""
 ) extends StripeList[Coupon]
+
+case class InvoiceLineItemList(
+  data: List[InvoiceLineItem],
+  hasMore: Boolean = false,
+  totalCount: Option[Int] = None,
+  url: String = ""
+) extends StripeList[InvoiceLineItem]
+
+case class InvoiceList(
+  data: List[Invoice],
+  hasMore: Boolean = false,
+  totalCount: Option[Int] = None,
+  url: String = ""
+) extends StripeList[Invoice]

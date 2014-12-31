@@ -1,6 +1,6 @@
 name := "streifen"
 
-version := "0.0.3"
+version := "0.0.4-SNAPSHOT"
 
 organization := "me.frmr.stripe"
 

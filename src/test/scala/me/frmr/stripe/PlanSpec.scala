@@ -16,7 +16,7 @@ class PlanSpec extends WordSpec with ShouldMatchers {
       val examplePlanJson = """
         {
           "interval": "month",
-          "name": "-JYI_nRwd_ltcGRLnVys",
+          "name": "AAAAplanname",
           "created": 1412299176,
           "amount": 2000,
           "currency": "usd",
@@ -27,22 +27,22 @@ class PlanSpec extends WordSpec with ShouldMatchers {
           "trial_period_days": null,
           "metadata": {
           },
-          "statement_description": null
+          "statement_descriptor": null
         }
       """
 
       val testPlan = camelifyFieldNames(parse(examplePlanJson)).extract[Plan]
 
-      testPlan.interval should equal(Some("month"))
-      testPlan.name should equal(Some("-JYI_nRwd_ltcGRLnVys"))
-      testPlan.created should equal(Some(1412299176))
-      testPlan.amount should equal(Some(2000))
-      testPlan.currency should equal(Some("usd"))
-      testPlan.id should equal(Some("-JYI_nRwd_ltcGRLnVys"))
-      testPlan.livemode should equal(Some(false))
-      testPlan.intervalCount should equal(Some(1))
+      testPlan.interval should equal("month")
+      testPlan.name should equal("AAAAplanname")
+      testPlan.created should equal(1412299176)
+      testPlan.amount should equal(2000)
+      testPlan.currency should equal("usd")
+      testPlan.id should equal("-JYI_nRwd_ltcGRLnVys")
+      testPlan.livemode should equal(false)
+      testPlan.intervalCount should equal(1)
       testPlan.trialPeriodDays should equal(None)
-      testPlan.statementDescription should equal(None)
+      testPlan.statementDescriptor should equal(None)
     }
   }
 }

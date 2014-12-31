@@ -17,7 +17,7 @@ case class Event(
   `type`: String,
   apiVersion: String,
   request: String,
-  customerEmail: String,
+  customerEmail: Option[String],
   raw: Option[JValue] = None
 ) extends StripeObject
 

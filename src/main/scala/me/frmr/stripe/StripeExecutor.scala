@@ -42,9 +42,13 @@ object AsStripeResponse extends (Response=>StripeResponse) {
  * }
  * }}}
 **/
-class StripeExecutor(apiKey: String, includeRaw: Boolean = false) {
+class StripeExecutor(
+  apiKey: String,
+  includeRaw: Boolean = false,
+  apiVersion: String = "2014-12-22"
+) {
   val httpExecutor = new Http()
-  val baseReq = url("https://api.stripe.com/v1").secure.as(apiKey, "")
+  val baseReq = url("https://api.stripe.com/v1").secure.as(apiKey, "") <:< Map("Stripe-Version" -> apiVersion)
   implicit val formats = DefaultFormats
 
   def execute(request: Req): Future[Box[StripeResponse]] = {

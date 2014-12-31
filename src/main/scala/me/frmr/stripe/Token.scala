@@ -13,12 +13,12 @@ import dispatch._, Defaults._
  * See https://stripe.com/docs/api#token_object
 **/
 case class Token(
-  id: Option[String] = None,
-  livemode: Option[Boolean] = None,
-  created: Option[Long] = None,
-  used: Option[Boolean] = None,
-  `type`: Option[String] = None,
-  card: Option[Card] = None,
+  id: String,
+  livemode: Boolean,
+  created: Long,
+  used: Boolean,
+  `type`: String,
+  card: Option[Card],
   raw: Option[JValue] = None
 ) extends StripeObject
 

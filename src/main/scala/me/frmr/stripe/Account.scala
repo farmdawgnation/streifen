@@ -22,7 +22,9 @@ case class Account(
   email: String,
   businessName: String,
   raw: Option[JValue] = None
-) extends StripeObject
+) extends StripeObject {
+  def withRaw(raw: JValue) = this.copy(raw = Some(raw))
+}
 
 object Account {
   def get(implicit exec: StripeExecutor) =

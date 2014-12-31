@@ -41,7 +41,9 @@ case class Charge(
   shipping: Option[ChargeShipping] = None,
   statementDescription: Option[String] = None,
   raw: Option[JValue] = None
-) extends StripeObject
+) extends StripeObject {
+  def withRaw(raw: JValue) = this.copy(raw = Some(raw))
+}
 
 object Charge extends Listable[ChargeList] with Gettable[Charge] {
   def baseResourceCalculator(req: Req) = req / "charges"

@@ -14,7 +14,9 @@ case class Balance(
   pending: List[BalanceItem],
   available: List[BalanceItem],
   raw: Option[JValue] = None
-) extends StripeObject
+) extends StripeObject {
+  def withRaw(raw: JValue) = this.copy(raw = Some(raw))
+}
 
 object Balance {
   def get(implicit exec: StripeExecutor) =

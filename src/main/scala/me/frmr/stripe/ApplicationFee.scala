@@ -22,7 +22,9 @@ case class ApplicationFee(
   application: String,
   charge: String,
   raw: Option[JValue] = None
-) extends StripeObject
+) extends StripeObject {
+  def withRaw(raw: JValue) = this.copy(raw = Some(raw))
+}
 
 object ApplicationFee extends Listable[ApplicationFeeList] with Gettable[ApplicationFee] {
   def baseResourceCalculator(req: Req) = req / "application_fees"

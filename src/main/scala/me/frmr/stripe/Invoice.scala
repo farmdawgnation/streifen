@@ -57,7 +57,9 @@ case class Invoice(
   taxPercent: Option[Double],
   metadata: Map[String, String],
   raw: Option[JValue] = None
-) extends StripeObject
+) extends StripeObject {
+  def withRaw(raw: JValue) = this.copy(raw = Some(raw))
+}
 
 object Invoice extends Listable[InvoiceList] with Gettable[Invoice] {
   def baseResourceCalculator(req: Req) =

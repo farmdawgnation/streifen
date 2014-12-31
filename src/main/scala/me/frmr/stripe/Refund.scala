@@ -20,7 +20,9 @@ case class Refund(
   receiptNumber: Option[String],
   description: Option[String],
   raw: Option[JValue]
-) extends StripeObject
+) extends StripeObject {
+  def withRaw(raw: JValue) = this.copy(raw = Some(raw))
+}
 
 object Refund extends ChildListable[RefundList] with ChildGettable[Refund] {
   def baseResourceCalculator(req: Req, parentId: String) =

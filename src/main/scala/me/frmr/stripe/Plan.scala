@@ -21,7 +21,9 @@ case class Plan(
   statementDescriptor: Option[String],
   metadata: Map[String, String],
   raw: Option[JValue]
-) extends StripeObject
+) extends StripeObject {
+  def withRaw(raw: JValue) = this.copy(raw = Some(raw))
+}
 
 object Plan extends Listable[PlanList] with Gettable[Plan] with Deleteable {
   def baseResourceCalculator(req: Req) =

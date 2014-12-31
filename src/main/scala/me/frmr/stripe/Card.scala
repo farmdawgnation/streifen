@@ -35,7 +35,9 @@ case class Card(
   name: Option[String] = None,
   receipient: Option[String] = None,
   raw: Option[JValue] = None
-) extends StripeObject
+) extends StripeObject {
+  def withRaw(raw: JValue) = this.copy(raw = Some(raw))
+}
 
 object Card extends ChildListable[CardList] with ChildGettable[Card] with ChildDeleteable {
   def baseResourceCalculator(req: Req, parentId: String) =

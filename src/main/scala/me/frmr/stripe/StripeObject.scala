@@ -40,4 +40,11 @@ abstract class StripeObject {
   **/
   def valueFor[T](transformer: (JValue)=>JValue)(implicit mf: Manifest[T]) =
     tryo(transformer(raw.getOrElse(JNothing)).extract[T](formats, mf)).filterNot(_ == null)
+
+  /**
+   * Create a copy of the StripeObject with the raw JValue representation attached.
+   *
+   * @param raw The raw JValue representation to attach.
+  **/
+  def withRaw(raw: JValue): StripeObject
 }

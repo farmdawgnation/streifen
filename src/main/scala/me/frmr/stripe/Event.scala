@@ -19,7 +19,9 @@ case class Event(
   request: String,
   customerEmail: Option[String],
   raw: Option[JValue] = None
-) extends StripeObject
+) extends StripeObject {
+  def withRaw(raw: JValue) = this.copy(raw = Some(raw))
+}
 
 object Event extends Listable[EventList] with Gettable[Event] {
   def baseResourceCalculator(req: Req) = req / "events"

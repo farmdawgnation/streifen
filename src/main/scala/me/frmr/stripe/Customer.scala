@@ -27,7 +27,9 @@ case class Customer(
   metadata: Map[String, String],
   subscriptions: Option[SubscriptionList],
   raw: Option[JValue] = None
-) extends StripeObject
+) extends StripeObject {
+  def withRaw(raw: JValue) = this.copy(raw = Some(raw))
+}
 
 object Customer extends Listable[CustomerList] with Gettable[Customer] with Deleteable {
   def baseResourceCalculator(req: Req) = req / "customers"

@@ -30,7 +30,9 @@ case class BalanceTransaction(
   source: String,
   description: Option[String],
   raw: Option[JValue] = None
-) extends StripeObject
+) extends StripeObject {
+  def withRaw(raw: JValue) = this.copy(raw = Some(raw))
+}
 
 object BalanceTransaction extends Gettable[BalanceTransaction] {
   def baseResourceCalculator(req: Req) = req / "balance" / "history"

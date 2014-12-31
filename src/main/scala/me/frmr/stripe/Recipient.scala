@@ -21,7 +21,9 @@ case class Recipient(
   cards: CardList,
   defaultCard: Option[String],
   raw: Option[JValue] = None
-) extends StripeObject
+) extends StripeObject {
+  def withRaw(raw: JValue) = this.copy(raw = Some(raw))
+}
 
 object Recipient extends Listable[RecipientList] with Gettable[Recipient] with Deleteable {
   def baseResourceCalculator(req: Req) = req / "recipients"

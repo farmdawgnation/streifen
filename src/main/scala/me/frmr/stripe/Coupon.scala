@@ -23,7 +23,9 @@ case class Coupon(
   valid: Boolean,
   metadata: Map[String, String],
   raw: Option[JValue] = None
-) extends StripeObject
+) extends StripeObject {
+  def withRaw(raw: JValue) = this.copy(raw = Some(raw))
+}
 
 object Coupon extends Listable[CouponList] with Gettable[Coupon] with Deleteable {
   def baseResourceCalculator(req: Req) =

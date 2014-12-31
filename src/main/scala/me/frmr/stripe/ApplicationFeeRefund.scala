@@ -17,7 +17,9 @@ case class ApplicationFeeRefund(
   metadata: Map[String, String],
   fee: String,
   raw: Option[JValue] = None
-) extends StripeObject
+) extends StripeObject {
+  def withRaw(raw: JValue) = this.copy(raw = Some(raw))
+}
 
 object ApplicationFeeRefund extends ChildListable[ApplicationFeeRefundList] with ChildGettable[ApplicationFeeRefund] {
   def baseResourceCalculator(req: Req, parentId: String) =

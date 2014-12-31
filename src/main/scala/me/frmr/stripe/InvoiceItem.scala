@@ -24,7 +24,9 @@ case class InvoiceItem(
   statementDescriptor: Option[String],
   metadata: Map[String, String],
   raw: Option[JValue] = None
-) extends StripeObject
+) extends StripeObject {
+  def withRaw(raw: JValue) = this.copy(raw = Some(raw))
+}
 
 object InvoiceItem extends Listable[InvoiceItemList] with Gettable[InvoiceItem] with Deleteable {
   def baseResourceCalculator(req: Req) =

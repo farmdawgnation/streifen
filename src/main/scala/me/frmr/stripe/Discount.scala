@@ -15,4 +15,6 @@ case class Discount(
   end: Long,
   subscription: String,
   raw: Option[JValue] = None
-) extends StripeObject
+) extends StripeObject {
+  def withRaw(raw: JValue) = this.copy(raw = Some(raw))
+}

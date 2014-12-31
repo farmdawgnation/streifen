@@ -20,7 +20,9 @@ case class Token(
   `type`: String,
   card: Option[Card],
   raw: Option[JValue] = None
-) extends StripeObject
+) extends StripeObject {
+  def withRaw(raw: JValue) = this.copy(raw = Some(raw))
+}
 
 object Token extends Gettable[Token] {
   def baseResourceCalculator(req: Req) = req / "tokens"

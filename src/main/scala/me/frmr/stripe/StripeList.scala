@@ -84,3 +84,10 @@ case class PlanList(
   totalCount: Option[Int] = None,
   url: String = ""
 ) extends StripeList[Plan]
+
+case class CouponList(
+  data: List[Coupon],
+  hasMore: Boolean = false,
+  totalCount: Option[Int] = None,
+  url: String = ""
+) extends StripeList[Coupon]

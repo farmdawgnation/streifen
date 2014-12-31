@@ -19,6 +19,8 @@ case class Account(
   displayName: String,
   statementDescriptor: Option[String],
   timezone: String,
+  email: String,
+  businessName: String,
   raw: Option[JValue] = None
 ) extends StripeObject
 

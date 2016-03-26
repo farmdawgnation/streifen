@@ -4,12 +4,12 @@ version := "0.0.4-SNAPSHOT"
 
 organization := "me.frmr.stripe"
 
-scalaVersion := "2.11.4"
+scalaVersion := "2.11.8"
 
 resolvers += "Farmdawg Temp Forks" at "http://dl.bintray.com/farmdawgnation/temp-forks"
 
 libraryDependencies ++= {
-  val liftVersion = "2.6-RC1"
+  val liftVersion = "2.6.3"
   Seq(
     "net.liftweb"               %% "lift-common"          % liftVersion,
     "net.liftweb"               %% "lift-util"            % liftVersion,

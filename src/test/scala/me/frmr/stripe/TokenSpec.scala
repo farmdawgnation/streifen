@@ -15,42 +15,45 @@ class TokenSpec extends WordSpec with ShouldMatchers {
     "retrieve correct fields from Stripe's JSON" in {
       val exampleTokenJson = """
         {
-          "id": "tok_15Fd2I2eZvKYlo2CnJvoo1FX",
-          "livemode": false,
-          "created": 1419996038,
-          "used": false,
+          "id": "tok_17szAe2eZvKYlo2Ch8eMPKHH",
           "object": "token",
-          "type": "card",
           "card": {
-            "id": "card_15Fd2I2eZvKYlo2CKcSU943C",
+            "id": "card_17szAe2eZvKYlo2Cg5FDnNgj",
             "object": "card",
-            "last4": "4242",
-            "brand": "Visa",
-            "funding": "credit",
-            "exp_month": 8,
-            "exp_year": 2015,
-            "fingerprint": "Xt5EWLLDS7FJjR1c",
-            "country": "US",
-            "name": null,
-            "address_line1": null,
-            "address_line2": null,
             "address_city": null,
+            "address_country": null,
+            "address_line1": null,
+            "address_line1_check": null,
+            "address_line2": null,
             "address_state": null,
             "address_zip": null,
-            "address_country": null,
-            "cvc_check": null,
-            "address_line1_check": null,
             "address_zip_check": null,
-            "dynamic_last4": null
-          }
+            "brand": "Visa",
+            "country": "US",
+            "cvc_check": null,
+            "dynamic_last4": null,
+            "exp_month": 8,
+            "exp_year": 2017,
+            "funding": "credit",
+            "last4": "4242",
+            "metadata": {
+            },
+            "name": null,
+            "tokenization_method": null
+          },
+          "client_ip": null,
+          "created": 1458928588,
+          "livemode": false,
+          "type": "card",
+          "used": false
         }
       """
 
       val testToken = camelifyFieldNames(parse(exampleTokenJson)).extract[Token]
 
-      testToken.id should equal("tok_15Fd2I2eZvKYlo2CnJvoo1FX")
+      testToken.id should equal("tok_17szAe2eZvKYlo2Ch8eMPKHH")
       testToken.livemode should equal(false)
-      testToken.created should equal(1419996038)
+      testToken.created should equal(1458928588)
       testToken.used should equal(false)
       testToken.`type` should equal("card")
     }

@@ -15,20 +15,30 @@ class BalanceSpec extends WordSpec with ShouldMatchers {
     "retrieve correct fields from Stripe's JSON" in {
       val exampleBalanceJson = """
         {
-          "pending": [
-            {
-              "amount": 4966640,
-              "currency": "usd"
-            }
-          ],
+          "object": "balance",
           "available": [
-            {
-              "amount": -2352,
-              "currency": "usd"
+          {
+            "currency": "usd",
+            "amount": -2352,
+            "source_types": {
+              "card": 8032622669,
+              "bank_account": 8509784,
+              "bitcoin_receiver": 1449199
             }
+          }
           ],
           "livemode": false,
-          "object": "balance"
+          "pending": [
+          {
+            "currency": "usd",
+            "amount": 4966640,
+            "source_types": {
+              "card": 746697673,
+              "bank_account": 0,
+              "bitcoin_receiver": 0
+            }
+          }
+          ]
         }
       """
 

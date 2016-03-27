@@ -15,12 +15,12 @@ import dispatch._, Defaults._
 case class Customer(
   id: String,
   livemode: Boolean,
-  cards: CardList,
+  sources: CardList,
   created: Long,
   accountBalance: Long,
   currency: String,
   delinquent: Boolean,
-  defaultCard: Option[String],
+  defaultSource: Option[String],
   description: Option[String],
   discount: Option[Discount],
   email: Option[String],
@@ -63,7 +63,7 @@ object Customer extends Listable[CustomerList] with Gettable[Customer] with Dele
     id: String,
     accountBalance: Option[String] = None,
     card: Option[String] = None,
-    defaultCard: Option[String] = None,
+    defaultSource: Option[String] = None,
     coupon: Option[String] = None,
     description: Option[String] = None,
     email: Option[String] = None,
@@ -73,7 +73,7 @@ object Customer extends Listable[CustomerList] with Gettable[Customer] with Dele
       accountBalance.map(("account_balance", _)),
       card.map(("card", _)),
       coupon.map(("coupon", _)),
-      defaultCard.map(("default_card", _)),
+      defaultSource.map(("default_source", _)),
       description.map(("description", _)),
       email.map(("email", _))
     ).flatten.toMap ++ metadataProcessor(metadata)

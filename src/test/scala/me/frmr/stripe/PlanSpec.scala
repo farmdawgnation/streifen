@@ -15,30 +15,30 @@ class PlanSpec extends WordSpec with ShouldMatchers {
     "retrieve correct fields from Stripe's JSON" in {
       val examplePlanJson = """
         {
-          "interval": "month",
-          "name": "AAAAplanname",
-          "created": 1412299176,
-          "amount": 2000,
-          "currency": "usd",
-          "id": "-JYI_nRwd_ltcGRLnVys",
+          "id": "gold2132",
           "object": "plan",
-          "livemode": false,
+          "amount": 2000,
+          "created": 1386249594,
+          "currency": "usd",
+          "interval": "month",
           "interval_count": 1,
-          "trial_period_days": null,
+          "livemode": false,
           "metadata": {
           },
-          "statement_descriptor": null
+          "name": "Gold ",
+          "statement_descriptor": null,
+          "trial_period_days": null
         }
       """
 
       val testPlan = camelifyFieldNames(parse(examplePlanJson)).extract[Plan]
 
       testPlan.interval should equal("month")
-      testPlan.name should equal("AAAAplanname")
-      testPlan.created should equal(1412299176)
+      testPlan.name should equal("Gold ")
+      testPlan.created should equal(1386249594)
       testPlan.amount should equal(2000)
       testPlan.currency should equal("usd")
-      testPlan.id should equal("-JYI_nRwd_ltcGRLnVys")
+      testPlan.id should equal("gold2132")
       testPlan.livemode should equal(false)
       testPlan.intervalCount should equal(1)
       testPlan.trialPeriodDays should equal(None)

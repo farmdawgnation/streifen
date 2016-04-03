@@ -4,19 +4,19 @@ version := "0.0.4-SNAPSHOT"
 
 organization := "me.frmr.stripe"
 
-scalaVersion := "2.11.4"
+scalaVersion := "2.11.8"
 
 resolvers += "Farmdawg Temp Forks" at "http://dl.bintray.com/farmdawgnation/temp-forks"
 
 libraryDependencies ++= {
-  val liftVersion = "2.6-RC1"
+  val liftVersion = "2.6.3"
   Seq(
     "net.liftweb"               %% "lift-common"          % liftVersion,
     "net.liftweb"               %% "lift-util"            % liftVersion,
     "net.liftweb"               %% "lift-json"            % liftVersion,
-    "net.databinder.dispatch"   %% "dispatch-core"        % "0.11.2",
-    "net.databinder.dispatch"   %% "dispatch-lift-json"   % "0.11.2",
-    "org.scalatest"             %% "scalatest"            % "2.2.1"        % "test"
+    "net.databinder.dispatch"   %% "dispatch-core"        % "0.11.3",
+    "net.databinder.dispatch"   %% "dispatch-lift-json"   % "0.11.3",
+    "org.scalatest"             %% "scalatest"            % "2.2.6"        % "test"
   )
 }
 

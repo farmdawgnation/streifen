@@ -15,50 +15,51 @@ class SubscriptionSpec extends WordSpec with ShouldMatchers {
     "retrieve correct fields from Stripe's JSON" in {
       val exampleSubscriptionJson = """
         {
-          "id": "sub_56Eev7i0d0N9Dx",
+          "id": "sub_89hyIohmkV31Ew",
+          "object": "subscription",
+          "application_fee_percent": null,
+          "cancel_at_period_end": false,
+          "canceled_at": null,
+          "current_period_end": 1461704593,
+          "current_period_start": 1459026193,
+          "customer": "cus_89c8SrPpHZP4ex",
+          "discount": null,
+          "ended_at": null,
+          "metadata": {
+          },
           "plan": {
-            "interval": "month",
-            "name": "-JYI_nRwd_ltcGRLnVys",
-            "created": 1412299176,
-            "amount": 2000,
-            "currency": "usd",
-            "id": "-JYI_nRwd_ltcGRLnVys",
+            "id": "gold2132",
             "object": "plan",
-            "livemode": false,
+            "amount": 2000,
+            "created": 1386249594,
+            "currency": "usd",
+            "interval": "month",
             "interval_count": 1,
-            "trial_period_days": null,
+            "livemode": false,
             "metadata": {
             },
-            "statement_description": null
+            "name": "Gold ",
+            "statement_descriptor": null,
+            "trial_period_days": null
           },
-          "object": "subscription",
-          "start": 1415326152,
-          "status": "active",
-          "customer": "cus_56ENenCV0GVVQ6",
-          "cancel_at_period_end": false,
-          "current_period_start": 1415326152,
-          "current_period_end": 1417918152,
-          "ended_at": null,
-          "trial_start": null,
-          "trial_end": null,
-          "canceled_at": null,
           "quantity": 1,
-          "application_fee_percent": null,
-          "discount": null,
-          "metadata": {
-          }
+          "start": 1459026193,
+          "status": "active",
+          "tax_percent": null,
+          "trial_end": null,
+          "trial_start": null
         }
       """
 
       val testSubscription = camelifyFieldNames(parse(exampleSubscriptionJson)).extract[Subscription]
 
-      testSubscription.id should equal(Some("sub_56Eev7i0d0N9Dx"))
-      testSubscription.start should equal(Some(1415326152))
+      testSubscription.id should equal(Some("sub_89hyIohmkV31Ew"))
+      testSubscription.start should equal(Some(1459026193))
       testSubscription.status should equal(Some("active"))
-      testSubscription.customer should equal(Some("cus_56ENenCV0GVVQ6"))
+      testSubscription.customer should equal(Some("cus_89c8SrPpHZP4ex"))
       testSubscription.cancelAtPeriodEnd should equal(Some(false))
-      testSubscription.currentPeriodStart should equal(Some(1415326152))
-      testSubscription.currentPeriodEnd should equal(Some(1417918152))
+      testSubscription.currentPeriodStart should equal(Some(1459026193))
+      testSubscription.currentPeriodEnd should equal(Some(1461704593))
       testSubscription.endedAt should equal(None)
       testSubscription.trialStart should equal(None)
       testSubscription.trialEnd should equal(None)

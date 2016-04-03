@@ -12,7 +12,6 @@ case class Account(
   id: String,
   chargesEnabled: Boolean,
   country: String,
-  currenciesSupported: List[String],
   defaultCurrency: String,
   detailsSubmitted: Boolean,
   transfersEnabled: Boolean,

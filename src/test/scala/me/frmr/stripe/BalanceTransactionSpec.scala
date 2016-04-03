@@ -15,44 +15,53 @@ class BalanceTransactionSpec extends WordSpec with ShouldMatchers {
     "retrieve correct fields from Stripe's JSON" in {
       val exampleJson = """
         {
-          "id": "txn_15DRvX2eZvKYlo2CgxMQ25SQ",
+          "id": "txn_17bBwe2eZvKYlo2Cuwcyi9or",
           "object": "balance_transaction",
-          "amount": 500,
+          "amount": 400,
+          "available_on": 1455235200,
+          "created": 1454687788,
           "currency": "usd",
-          "net": 455,
-          "type": "charge",
-          "created": 1419476679,
-          "available_on": 1420070400,
-          "status": "pending",
-          "fee": 45,
+          "description": "Charge for test@example.com",
+          "fee": 42,
           "fee_details": [
-            {
-              "amount": 45,
-              "currency": "usd",
-              "type": "stripe_fee",
-              "description": "Stripe processing fees",
-              "application": null
-            }
+          {
+            "amount": 42,
+            "application": null,
+            "currency": "usd",
+            "description": "Stripe processing fees",
+            "type": "stripe_fee"
+          }
           ],
-          "source": "ch_15DRvX2eZvKYlo2CzgFB69s3",
-          "description": null
+          "net": 358,
+          "source": "ch_17bBwe2eZvKYlo2Crk3VGEG8",
+          "sourced_transfers": {
+            "object": "list",
+            "data": [
+
+            ],
+            "has_more": false,
+            "total_count": 0,
+            "url": "/v1/transfers?source_transaction=ch_17bBwe2eZvKYlo2Crk3VGEG8"
+          },
+          "status": "pending",
+          "type": "charge"
         }
       """
 
       val testBalanceTransaction = camelifyFieldNames(parse(exampleJson)).extract[BalanceTransaction]
 
-      testBalanceTransaction.id should equal("txn_15DRvX2eZvKYlo2CgxMQ25SQ")
-      testBalanceTransaction.amount should equal(500)
+      testBalanceTransaction.id should equal("txn_17bBwe2eZvKYlo2Cuwcyi9or")
+      testBalanceTransaction.amount should equal(400)
       testBalanceTransaction.currency should equal("usd")
-      testBalanceTransaction.net should equal(455)
+      testBalanceTransaction.net should equal(358)
       testBalanceTransaction.`type` should equal("charge")
-      testBalanceTransaction.created should equal(1419476679)
-      testBalanceTransaction.availableOn should equal(1420070400)
+      testBalanceTransaction.created should equal(1454687788)
+      testBalanceTransaction.availableOn should equal(1455235200)
       testBalanceTransaction.status should equal("pending")
-      testBalanceTransaction.fee should equal(45)
-      testBalanceTransaction.source should equal("ch_15DRvX2eZvKYlo2CzgFB69s3")
-      testBalanceTransaction.description should equal(None)
-      testBalanceTransaction.feeDetails(0).amount should equal(45)
+      testBalanceTransaction.fee should equal(42)
+      testBalanceTransaction.source should equal("ch_17bBwe2eZvKYlo2Crk3VGEG8")
+      testBalanceTransaction.description should equal(Some("Charge for test@example.com"))
+      testBalanceTransaction.feeDetails(0).amount should equal(42)
       testBalanceTransaction.feeDetails(0).currency should equal("usd")
       testBalanceTransaction.feeDetails(0).`type` should equal("stripe_fee")
       testBalanceTransaction.feeDetails(0).description should equal(Some("Stripe processing fees"))

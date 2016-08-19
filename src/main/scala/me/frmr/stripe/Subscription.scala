@@ -20,6 +20,7 @@ case class Subscription(
   trialEnd: Option[Long],
   canceledAt: Option[Long],
   quantity: Option[Int],
+  taxPercent: Option[Double],
   applicationFeePercent: Option[Int],
   discount: Option[Discount],
   raw: Option[JValue]
@@ -39,6 +40,7 @@ object Subscription extends ChildListable[SubscriptionList] with ChildGettable[S
     card: Option[String] = None,
     quantity: Option[Int] = None,
     applicationFeePercent: Option[Double] = None,
+    taxPercent: Option[Double] = None,
     metadata: Map[String, String] = Map.empty
   )(implicit exec: StripeExecutor): Future[Box[Subscription]] = {
     val params = List(
@@ -47,7 +49,8 @@ object Subscription extends ChildListable[SubscriptionList] with ChildGettable[S
       trialEnd.map(trialEnd => ("trialEnd", trialEnd.toString)),
       card.map(("card", _)),
       quantity.map(quantity => ("quantity", quantity.toString)),
-      applicationFeePercent.map(fee => ("application_fee_percent", fee.toString))
+      applicationFeePercent.map(fee => ("application_fee_percent", fee.toString)),
+      taxPercent.map(taxPercent => ("tax_percent", taxPercent.toString))
     ).flatten.toMap ++ metadataProcessor(metadata)
 
     exec.executeFor[Subscription](baseResourceCalculator(exec.baseReq, customerId) << params)
@@ -62,6 +65,7 @@ object Subscription extends ChildListable[SubscriptionList] with ChildGettable[S
     trialEnd: Option[Long] = None,
     card: Option[String] = None,
     quantity: Option[Int] = None,
+    taxPercent: Option[Double] = None,
     applicationFeePercent: Option[Double] = None,
     metadata: Map[String, String] = Map.empty
   )(implicit exec: StripeExecutor): Future[Box[Subscription]] = {
@@ -72,7 +76,8 @@ object Subscription extends ChildListable[SubscriptionList] with ChildGettable[S
       trialEnd.map(trialEnd => ("trialEnd", trialEnd.toString)),
       card.map(("card", _)),
       quantity.map(quantity => ("quantity", quantity.toString)),
-      applicationFeePercent.map(fee => ("application_fee_percent", fee.toString))
+      applicationFeePercent.map(fee => ("application_fee_percent", fee.toString)),
+      taxPercent.map(taxPercent => ("tax_percent", taxPercent.toString))
     ).flatten.toMap ++ metadataProcessor(metadata)
 
     exec.executeFor[Subscription](

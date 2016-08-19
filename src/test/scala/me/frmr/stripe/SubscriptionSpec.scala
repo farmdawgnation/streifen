@@ -45,7 +45,7 @@ class SubscriptionSpec extends WordSpec with ShouldMatchers {
           "quantity": 1,
           "start": 1459026193,
           "status": "active",
-          "tax_percent": null,
+          "tax_percent": 0.08,
           "trial_end": null,
           "trial_start": null
         }
@@ -66,6 +66,7 @@ class SubscriptionSpec extends WordSpec with ShouldMatchers {
       testSubscription.canceledAt should equal(None)
       testSubscription.quantity should equal(Some(1))
       testSubscription.applicationFeePercent should equal(None)
+      testSubscription.taxPercent should equal(Some(0.08))
       testSubscription.discount should equal(None)
     }
   }

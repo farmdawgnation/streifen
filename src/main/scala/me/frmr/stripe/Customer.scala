@@ -26,6 +26,7 @@ case class Customer(
   email: Option[String],
   metadata: Map[String, String],
   subscriptions: Option[SubscriptionList],
+  taxPercent: Option[Double],
   raw: Option[JValue] = None
 ) extends StripeObject {
   def withRaw(raw: JValue) = this.copy(raw = Some(raw))
@@ -43,7 +44,8 @@ object Customer extends Listable[CustomerList] with Gettable[Customer] with Dele
     metadata: Map[String, String] = Map.empty,
     plan: Option[String] = None,
     quantity: Option[Int] = None,
-    trialEnd: Option[Long] = None
+    trialEnd: Option[Long] = None,
+    taxPercent: Option[Double] = None
   )(implicit exec: StripeExecutor): Future[Box[Customer]] = {
     val params = List(
       accountBalance.map(("account_balance", _)),
@@ -53,7 +55,8 @@ object Customer extends Listable[CustomerList] with Gettable[Customer] with Dele
       email.map(("email", _)),
       plan.map(("plan", _)),
       quantity.map(quantity => ("quantity", quantity.toString)),
-      trialEnd.map(trialEnd => ("trialEnd", trialEnd.toString))
+      trialEnd.map(trialEnd => ("trialEnd", trialEnd.toString)),
+      taxPercent.map(taxPercent => ("tax_percent", taxPercent.toString))
     ).flatten.toMap ++ metadataProcessor(metadata)
 
     exec.executeFor[Customer](baseResourceCalculator(exec.baseReq) << params)

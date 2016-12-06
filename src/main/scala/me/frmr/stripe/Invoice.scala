@@ -43,16 +43,16 @@ trait BaseInvoice {
   def subtotal: Long
   def total: Long
   def applicationFee: Option[Long]
-  def charge: String
+  def charge: Option[String]
   def description: Option[String]
   def discount: Option[Discount]
-  def endingBalance: Long
+  def endingBalance: Option[Long]
   def nextPaymentAttempt: Option[Long]
   def receiptNumber: Option[String]
-  def statementDescriptor: String
+  def statementDescriptor: Option[String]
   def subscription: Option[String]
-  def webhooksDeliveredAt: Long
-  def tax: Long
+  def webhooksDeliveredAt: Option[Long]
+  def tax: Option[Long]
   def taxPercent: Option[Double]
   def metadata: Map[String, String]
   def raw: Option[JValue] = None
@@ -77,16 +77,16 @@ case class Invoice(
   subtotal: Long,
   total: Long,
   applicationFee: Option[Long],
-  charge: String,
+  charge: Option[String],
   description: Option[String],
   discount: Option[Discount],
-  endingBalance: Long,
+  endingBalance: Option[Long],
   nextPaymentAttempt: Option[Long],
   receiptNumber: Option[String],
-  statementDescriptor: String,
+  statementDescriptor: Option[String],
   subscription: Option[String],
-  webhooksDeliveredAt: Long,
-  tax: Long,
+  webhooksDeliveredAt: Option[Long],
+  tax: Option[Long],
   taxPercent: Option[Double],
   metadata: Map[String, String],
   override val raw: Option[JValue] = None
@@ -112,16 +112,16 @@ case class UpcomingInvoice(
   subtotal: Long,
   total: Long,
   applicationFee: Option[Long],
-  charge: String,
+  charge: Option[String],
   description: Option[String],
   discount: Option[Discount],
-  endingBalance: Long,
+  endingBalance: Option[Long],
   nextPaymentAttempt: Option[Long],
   receiptNumber: Option[String],
-  statementDescriptor: String,
+  statementDescriptor: Option[String],
   subscription: Option[String],
-  webhooksDeliveredAt: Long,
-  tax: Long,
+  webhooksDeliveredAt: Option[Long],
+  tax: Option[Long],
   taxPercent: Option[Double],
   metadata: Map[String, String],
   override val raw: Option[JValue] = None

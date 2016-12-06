@@ -133,6 +133,8 @@ case class InvoiceLineItemList(
   url: String = "",
   raw: Option[JValue] = None
 ) extends StripeList[InvoiceLineItem]  {
+  def this(data: List[InvoiceLineItem], totalCount: Option[Int], url: String, raw: Option[JValue]) =
+    this(data, false, totalCount, url, raw)
   def withRaw(raw: JValue) = this.copy(raw = Some(raw))
 }
 

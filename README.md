@@ -6,7 +6,7 @@ Welcome to Streifen. This API is designed to make it both wicked easy and wicked
 integrate Stripe into your webapp. It's not exactly finished yet, but I'm using it in production
 since it already suits my needs and I'm pretty confident you can do the same without much fear.
 
-The current version of the library is tested up to the **2014-12-22** version of the Stripe API.
+The current version of the library is tested up to the **2016-03-07** version of the Stripe API.
 
 Some things about Streifen:
 
@@ -23,7 +23,7 @@ Some things about Streifen:
 To get started with Streifen, add it to your library dependencies in your sbt buildfile!
 
 ```scala
-libraryDependencies += "me.frmr.stripe" %% "streifen" % "0.0.4"
+libraryDependencies += "me.frmr.stripe" %% "streifen" % "0.0.5"
 ```
 
 ## Using Streifen

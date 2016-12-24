@@ -12,7 +12,7 @@ case class Discount(
   coupon: Coupon,
   customer: String,
   start: Long,
-  end: Long,
+  end: Option[Long],
   subscription: String,
   raw: Option[JValue] = None
 ) extends StripeObject {

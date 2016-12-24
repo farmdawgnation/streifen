@@ -25,6 +25,39 @@ case class InvoiceLineItem(
   metadata: Map[String, String]
 )
 
+trait BaseInvoice {
+  def livemode: Boolean
+  def amountDue: Long
+  def attemptCount: Int
+  def attempted: Boolean
+  def closed: Boolean
+  def currency: String
+  def customer: String
+  def date: Long
+  def forgiven: Boolean
+  def lines: InvoiceLineItemList
+  def paid: Boolean
+  def periodEnd: Long
+  def periodStart: Long
+  def startingBalance: Long
+  def subtotal: Long
+  def total: Long
+  def applicationFee: Option[Long]
+  def charge: Option[String]
+  def description: Option[String]
+  def discount: Option[Discount]
+  def endingBalance: Option[Long]
+  def nextPaymentAttempt: Option[Long]
+  def receiptNumber: Option[String]
+  def statementDescriptor: Option[String]
+  def subscription: Option[String]
+  def webhooksDeliveredAt: Option[Long]
+  def tax: Option[Long]
+  def taxPercent: Option[Double]
+  def metadata: Map[String, String]
+  def raw: Option[JValue] = None
+}
+
 case class Invoice(
   id: String,
   livemode: Boolean,
@@ -44,20 +77,55 @@ case class Invoice(
   subtotal: Long,
   total: Long,
   applicationFee: Option[Long],
-  charge: String,
+  charge: Option[String],
   description: Option[String],
   discount: Option[Discount],
-  endingBalance: Long,
+  endingBalance: Option[Long],
   nextPaymentAttempt: Option[Long],
   receiptNumber: Option[String],
-  statementDescriptor: String,
+  statementDescriptor: Option[String],
   subscription: Option[String],
-  webhooksDeliveredAt: Long,
-  tax: Long,
+  webhooksDeliveredAt: Option[Long],
+  tax: Option[Long],
   taxPercent: Option[Double],
   metadata: Map[String, String],
-  raw: Option[JValue] = None
-) extends StripeObject {
+  override val raw: Option[JValue] = None
+) extends StripeObject with BaseInvoice {
+  def withRaw(raw: JValue) = this.copy(raw = Some(raw))
+}
+
+case class UpcomingInvoice(
+  livemode: Boolean,
+  amountDue: Long,
+  attemptCount: Int,
+  attempted: Boolean,
+  closed: Boolean,
+  currency: String,
+  customer: String,
+  date: Long,
+  forgiven: Boolean,
+  lines: InvoiceLineItemList,
+  paid: Boolean,
+  periodEnd: Long,
+  periodStart: Long,
+  startingBalance: Long,
+  subtotal: Long,
+  total: Long,
+  applicationFee: Option[Long],
+  charge: Option[String],
+  description: Option[String],
+  discount: Option[Discount],
+  endingBalance: Option[Long],
+  nextPaymentAttempt: Option[Long],
+  receiptNumber: Option[String],
+  statementDescriptor: Option[String],
+  subscription: Option[String],
+  webhooksDeliveredAt: Option[Long],
+  tax: Option[Long],
+  taxPercent: Option[Double],
+  metadata: Map[String, String],
+  override val raw: Option[JValue] = None
+) extends StripeObject with BaseInvoice {
   def withRaw(raw: JValue) = this.copy(raw = Some(raw))
 }
 
@@ -104,7 +172,7 @@ object Invoice extends Listable[InvoiceList] with Gettable[Invoice] {
     val params = requiredParams ++ optionalParams
     val uri = baseResourceCalculator(exec.baseReq) / "upcoming"
 
-    exec.executeFor[Invoice](uri <<? params)
+    exec.executeFor[UpcomingInvoice](uri <<? params)
   }
 
   def update(

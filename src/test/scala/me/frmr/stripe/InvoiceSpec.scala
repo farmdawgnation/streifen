@@ -91,7 +91,8 @@ class InvoiceSpec extends WordSpec with ShouldMatchers {
           ],
           "total_count": 1,
           "object": "list",
-          "url": "/v1/invoices/in_19Natl2bG3XBuYiIpVqtN11d/lines"
+          "url": "/v1/invoices/in_19Natl2bG3XBuYiIpVqtN11d/lines",
+          "has_more": false
         },
         "livemode": false,
         "metadata": {

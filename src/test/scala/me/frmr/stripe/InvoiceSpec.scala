@@ -27,7 +27,29 @@ class InvoiceSpec extends WordSpec with ShouldMatchers {
         "customer": "cus_9gyrZOecXAh5Dz",
         "date": 1480999789,
         "description": null,
-        "discount": null,
+        "discount": {
+          "object": "discount",
+          "coupon": {
+            "id": "twopets",
+            "object": "coupon",
+            "amount_off": null,
+            "created": 1480277071,
+            "currency": null,
+            "duration": "forever",
+            "duration_in_months": null,
+            "livemode": false,
+            "max_redemptions": null,
+            "metadata": {},
+            "percent_off": 5,
+            "redeem_by": null,
+            "times_redeemed": 7,
+            "valid": true
+          },
+          "customer": "cus_9UTpVQq30U9bWb",
+          "end": null,
+          "start": 1482593004,
+          "subscription": "sub_9nt9bLaaimRN2I"
+        },
         "ending_balance": null,
         "forgiven": false,
         "lines": {
@@ -96,6 +118,7 @@ class InvoiceSpec extends WordSpec with ShouldMatchers {
       testInvoice.currency should equal("usd")
       testInvoice.customer should equal("cus_9gyrZOecXAh5Dz")
       testInvoice.description should equal(None)
+      testInvoice.discount should not equal(None)
     }
   }
 
@@ -114,7 +137,29 @@ class InvoiceSpec extends WordSpec with ShouldMatchers {
         "customer": "cus_9gyrZOecXAh5Dz",
         "date": 1480999789,
         "description": null,
-        "discount": null,
+        "discount": {
+          "object": "discount",
+          "coupon": {
+            "id": "twopets",
+            "object": "coupon",
+            "amount_off": null,
+            "created": 1480277071,
+            "currency": null,
+            "duration": "forever",
+            "duration_in_months": null,
+            "livemode": false,
+            "max_redemptions": null,
+            "metadata": {},
+            "percent_off": 5,
+            "redeem_by": null,
+            "times_redeemed": 7,
+            "valid": true
+          },
+          "customer": "cus_9UTpVQq30U9bWb",
+          "end": null,
+          "start": 1482593004,
+          "subscription": "sub_9nt9bLaaimRN2I"
+        },
         "ending_balance": null,
         "forgiven": false,
         "lines": {
@@ -151,6 +196,7 @@ class InvoiceSpec extends WordSpec with ShouldMatchers {
       testUpcoming.currency should equal("usd")
       testUpcoming.customer should equal("cus_9gyrZOecXAh5Dz")
       testUpcoming.description should equal(None)
+      testUpcoming.discount should not equal(None)
     }
   }
 }

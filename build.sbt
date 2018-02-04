@@ -4,19 +4,19 @@ version := "0.0.6-SNAPSHOT"
 
 organization := "me.frmr.stripe"
 
-scalaVersion := "2.11.8"
+scalaVersion := "2.12.4"
 
 resolvers += "Farmdawg Temp Forks" at "http://dl.bintray.com/farmdawgnation/temp-forks"
 
 libraryDependencies ++= {
-  val liftVersion = "2.6.3"
+  val liftVersion = "3.2.0"
   Seq(
     "net.liftweb"               %% "lift-common"          % liftVersion,
     "net.liftweb"               %% "lift-util"            % liftVersion,
     "net.liftweb"               %% "lift-json"            % liftVersion,
-    "net.databinder.dispatch"   %% "dispatch-core"        % "0.11.3",
-    "net.databinder.dispatch"   %% "dispatch-lift-json"   % "0.11.3",
-    "org.scalatest"             %% "scalatest"            % "2.2.6"        % "test"
+    "net.databinder.dispatch"   %% "dispatch-core"        % "0.13.3",
+    "net.databinder.dispatch"   %% "dispatch-lift-json"   % "0.13.3",
+    "org.scalatest"             %% "scalatest"            % "3.0.5"        % "test"
   )
 }
 
@@ -32,9 +32,9 @@ buildInfoKeys := Seq[BuildInfoKey](name, version, scalaVersion, sbtVersion)
 
 buildInfoPackage := "me.frmr.stripe"
 
-publishTo <<= version { (v: String) =>
+publishTo := {
   val nexus = "https://oss.sonatype.org/"
-  if (v.trim.endsWith("SNAPSHOT"))
+  if (isSnapshot.value)
     Some("snapshots" at nexus + "content/repositories/snapshots")
   else
     Some("releases"  at nexus + "service/local/staging/deploy/maven2")

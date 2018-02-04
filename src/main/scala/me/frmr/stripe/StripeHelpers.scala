@@ -5,15 +5,15 @@ import net.liftweb.util.Helpers._
 
 object StripeHelpers {
   def camelifyFieldNames(input: JValue): JValue = {
-    input.map {
+    input mapField {
       case JField(fieldName, value) =>
         JField(camelifyMethod(fieldName), value)
-
+        
       case JArray(contents) =>
-        JArray(contents.map(camelifyFieldNames))
+        JArray(contents.mapField(camelifyFieldNames))
 
       case obj @ JObject(fields) =>
-        JObject(fields.map(camelifyFieldNames).asInstanceOf[List[JField]])
+        JObject(fields.mapField(camelifyFieldNames).asInstanceOf[List[JField]])
 
       case x =>
         x

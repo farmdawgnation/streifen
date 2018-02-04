@@ -6,7 +6,7 @@ import net.liftweb.util._
 import net.liftweb.util.Helpers._
 
 import dispatch._, Defaults._
-import com.ning.http.client.Response
+import org.asynchttpclient.Response
 
 /**
  * The base class for all singletons that will facilitate communication

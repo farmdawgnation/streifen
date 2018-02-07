@@ -6,8 +6,6 @@ organization := "me.frmr.stripe"
 
 scalaVersion := "2.12.4"
 
-resolvers += "Farmdawg Temp Forks" at "http://dl.bintray.com/farmdawgnation/temp-forks"
-
 libraryDependencies ++= {
   val liftVersion = "3.2.0"
   Seq(

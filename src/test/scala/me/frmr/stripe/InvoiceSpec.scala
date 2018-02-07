@@ -8,7 +8,7 @@ import me.frmr.stripe.StripeHelpers._
 
 import org.scalatest._
 
-class InvoiceSpec extends WordSpec with ShouldMatchers {
+class InvoiceSpec extends WordSpec with Matchers {
   implicit val formats = DefaultFormats
 
   "Invoice object" should {

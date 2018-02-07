@@ -8,7 +8,7 @@ import me.frmr.stripe.StripeHelpers._
 
 import org.scalatest._
 
-class BalanceTransactionSpec extends WordSpec with ShouldMatchers {
+class BalanceTransactionSpec extends WordSpec with Matchers {
   implicit val formats = DefaultFormats
 
   "BalanceTransaction object" should {

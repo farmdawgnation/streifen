@@ -1,10 +1,10 @@
 name := "streifen"
 
-version := "0.0.6"
+version := "0.0.7-SNAPSHOT"
 
 organization := "me.frmr.stripe"
 
-scalaVersion := "2.11.8"
+scalaVersion := "2.11.12"
 
 resolvers += "Farmdawg Temp Forks" at "http://dl.bintray.com/farmdawgnation/temp-forks"
 
@@ -32,9 +32,9 @@ buildInfoKeys := Seq[BuildInfoKey](name, version, scalaVersion, sbtVersion)
 
 buildInfoPackage := "me.frmr.stripe"
 
-publishTo <<= version { (v: String) =>
+publishTo := {
   val nexus = "https://oss.sonatype.org/"
-  if (v.trim.endsWith("SNAPSHOT"))
+  if (isSnapshot.value)
     Some("snapshots" at nexus + "content/repositories/snapshots")
   else
     Some("releases"  at nexus + "service/local/staging/deploy/maven2")

@@ -22,7 +22,7 @@ class SubscriptionSpec extends WordSpec with ShouldMatchers {
           "canceled_at": null,
           "current_period_end": 1461704593,
           "current_period_start": 1459026193,
-          "billing_cycle_anchor": 1459026193,
+          "billing_cycle_anchor": "now",
           "customer": "cus_89c8SrPpHZP4ex",
           "discount": null,
           "ended_at": null,
@@ -61,7 +61,7 @@ class SubscriptionSpec extends WordSpec with ShouldMatchers {
       testSubscription.cancelAtPeriodEnd should equal(Some(false))
       testSubscription.currentPeriodStart should equal(Some(1459026193))
       testSubscription.currentPeriodEnd should equal(Some(1461704593))
-      testSubscription.billingCycleAnchor should equal(Some(1459026193))
+      testSubscription.billingCycleAnchor should equal(Some("now"))
       testSubscription.endedAt should equal(None)
       testSubscription.trialStart should equal(None)
       testSubscription.trialEnd should equal(None)

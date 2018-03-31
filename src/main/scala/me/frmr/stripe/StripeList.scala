@@ -36,6 +36,16 @@ case class SubscriptionList(
   def withRaw(raw: JValue) = this.copy(raw = Some(raw))
 }
 
+case class SubscriptionItemList(
+  data: List[SubscriptionItem],
+  hasMore: Boolean = false,
+  totalCount: Option[Int] = None,
+  url: String = "",
+  raw: Option[JValue] = None
+) extends StripeList[SubscriptionItem] {
+  def withRaw(raw: JValue) = this.copy(raw = Some(raw))
+}
+
 case class RefundList(
   data: List[Refund],
   hasMore: Boolean = false,

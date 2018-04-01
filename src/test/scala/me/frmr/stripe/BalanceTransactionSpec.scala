@@ -34,15 +34,6 @@ class BalanceTransactionSpec extends WordSpec with ShouldMatchers {
           ],
           "net": 358,
           "source": "ch_17bBwe2eZvKYlo2Crk3VGEG8",
-          "sourced_transfers": {
-            "object": "list",
-            "data": [
-
-            ],
-            "has_more": false,
-            "total_count": 0,
-            "url": "/v1/transfers?source_transaction=ch_17bBwe2eZvKYlo2Crk3VGEG8"
-          },
           "status": "pending",
           "type": "charge"
         }

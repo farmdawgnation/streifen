@@ -24,6 +24,7 @@ case class Subscription(
   taxPercent: Option[Double],
   applicationFeePercent: Option[Int],
   discount: Option[Discount],
+  items: SubscriptionItemList,
   raw: Option[JValue]
 ) extends StripeObject {
   def withRaw(raw: JValue) = this.copy(raw = Some(raw))

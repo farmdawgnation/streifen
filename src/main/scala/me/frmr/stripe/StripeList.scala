@@ -136,6 +136,16 @@ case class PlanList(
   def withRaw(raw: JValue) = this.copy(raw = Some(raw))
 }
 
+case class ProductList(
+  data: List[Product],
+  hasMore: Boolean = false,
+  totalCount: Option[Int] = None,
+  url: String = "",
+  raw: Option[JValue] = None
+) extends StripeList[Product] {
+  def withRaw(raw: JValue) = this.copy(raw = Some(raw))
+}
+
 case class CouponList(
   data: List[Coupon],
   hasMore: Boolean = false,

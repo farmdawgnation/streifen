@@ -31,7 +31,7 @@ case class Charge(
   balanceTransaction: Option[String] = None,
   customer: Option[String] = None,
   description: Option[String] = None,
-  dispute: Option[Dispute] = None,
+  dispute: Option[String] = None,
   failureCode: Option[String] = None,
   failureMessage: Option[String] = None,
   invoice: Option[String] = None,

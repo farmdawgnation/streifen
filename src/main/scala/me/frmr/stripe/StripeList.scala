@@ -106,6 +106,16 @@ case class TransferList(
   def withRaw(raw: JValue) = this.copy(raw = Some(raw))
 }
 
+case class PayoutList(
+  data: List[Payout],
+  hasMore: Boolean = false,
+  totalCount: Option[Int] = None,
+  url: String = "",
+  raw: Option[JValue] = None
+) extends StripeList[Payout] {
+  def withRaw(raw: JValue) = this.copy(raw = Some(raw))
+}
+
 case class ChargeList(
   data: List[Charge],
   hasMore: Boolean = false,

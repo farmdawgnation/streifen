@@ -10,7 +10,6 @@ import dispatch._, Defaults._
 
 case class Plan(
   interval: String,
-  name: String,
   created: Long,
   amount: Long,
   currency: String,
@@ -34,7 +33,7 @@ object Plan extends Listable[PlanList] with Gettable[Plan] with Deleteable {
     amount: Long,
     currency: String,
     interval: String,
-    name: String,
+    product: String,
     intervalCount: Option[Int] = None,
     trialPeriodDays: Option[Int] = None,
     statementDescriptor: Option[String] = None,
@@ -45,7 +44,7 @@ object Plan extends Listable[PlanList] with Gettable[Plan] with Deleteable {
       "amount" -> amount.toString,
       "currency" -> currency,
       "interval" -> interval,
-      "name" -> name
+      "product" -> product
     )
 
     val optionalParams = List(
@@ -62,12 +61,10 @@ object Plan extends Listable[PlanList] with Gettable[Plan] with Deleteable {
 
   def update(
     id: String,
-    name: Option[String] = None,
     metadata: Map[String, String] = Map.empty,
     statementDescriptor: Option[String] = None
   )(implicit exec: StripeExecutor) = {
     val params = List(
-      name.map(("name", _)),
       statementDescriptor.map(("statement_descriptor", _))
     ).flatten.toMap ++ metadataProcessor(metadata)
     val uri = baseResourceCalculator(exec.baseReq) / id

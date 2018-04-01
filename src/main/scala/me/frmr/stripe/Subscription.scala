@@ -43,6 +43,8 @@ object Subscription extends ChildListable[SubscriptionList] with ChildGettable[S
     quantity: Option[Int] = None,
     applicationFeePercent: Option[Double] = None,
     taxPercent: Option[Double] = None,
+    billingCycleAnchor: Option[Long] = None,
+    prorate: Option[Boolean] = None,
     metadata: Map[String, String] = Map.empty
   )(implicit exec: StripeExecutor): Future[Box[Subscription]] = {
     val params = List(
@@ -52,6 +54,8 @@ object Subscription extends ChildListable[SubscriptionList] with ChildGettable[S
       card.map(("card", _)),
       quantity.map(quantity => ("quantity", quantity.toString)),
       applicationFeePercent.map(fee => ("application_fee_percent", fee.toString)),
+      billingCycleAnchor.map(anchor => ("billing_cycle_anchor", billingCycleAnchor.toString)),
+      prorate.map(protrate => ("prorate", protrate.toString)),
       taxPercent.map(taxPercent => ("tax_percent", taxPercent.toString))
     ).flatten.toMap ++ metadataProcessor(metadata)
 

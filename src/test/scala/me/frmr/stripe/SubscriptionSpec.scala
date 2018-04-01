@@ -26,6 +26,44 @@ class SubscriptionSpec extends WordSpec with ShouldMatchers {
           "customer": "cus_89c8SrPpHZP4ex",
           "discount": null,
           "ended_at": null,
+          "items": {
+            "object": "list",
+            "data": [
+              {
+                "id": "si_18Tken2r9wsOBpY08G3mj9qS",
+                "object": "subscription_item",
+                "created": 1459217735,
+                "metadata": {
+                },
+                "plan": {
+                  "id": "product",
+                  "object": "plan",
+                  "amount": 1000,
+                  "billing_scheme": "per_unit",
+                  "created": 1459217641,
+                  "currency": "usd",
+                  "interval": "month",
+                  "interval_count": 1,
+                  "livemode": false,
+                  "metadata": {
+                },
+                "nickname": null,
+                "product": "prod_BTpMHa2qF5LEXP",
+                "tiers": null,
+                "tiers_mode": null,
+                "transform_usage": null,
+                "trial_period_days": null,
+                "usage_type": "licensed",
+                "statement_descriptor": "Company ABC",
+                "name": "Product"
+              },
+              "quantity": 1,
+              "subscription": "sub_8AXTyitxcR9LM6"
+            }],
+            "has_more": false,
+            "total_count": 1,
+            "url": "/v1/subscription_items?subscription=sub_8AXTyitxcR9LM6"
+          },
           "metadata": {
           },
           "plan": {

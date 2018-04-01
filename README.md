@@ -6,7 +6,7 @@ Welcome to Streifen. This API is designed to make it both wicked easy and wicked
 integrate Stripe into your webapp. It's not exactly finished yet, but I'm using it in production
 since it already suits my needs and I'm pretty confident you can do the same without much fear.
 
-The current version of the library is tested up to the **2017-02-14** version of the Stripe API.
+The current version of the library is tested up to the **2018-02-28** version of the Stripe API.
 
 Some things about Streifen:
 
@@ -45,10 +45,10 @@ By default, the StripeExecutor will be locked to the version of the API that the
 is tested against. If you want to change that you could declare your executor like so:
 
 ```scala
-implicit val e = new StripeExecutor("myapikey", apiVersion = "2017-02-14")
+implicit val e = new StripeExecutor("myapikey", apiVersion = "2018-02-28")
 ```
 
-That would lock your app to the 2017-02-14 version of the API regardless of what the version of the
+That would lock your app to the 2018-02-28 version of the API regardless of what the version of the
 library you're using wants. *Please be aware this could cause things to break.* If for some reason
 we're not pulling out data that you need from the JSON that Stripe sends us, you can get a copy of
 that represented as a Lift JValue by setting the `includeRaw` parameter on the executor to true.

@@ -45,7 +45,7 @@ object AsStripeResponse extends (Response=>StripeResponse) {
 class StripeExecutor(
   apiKey: String,
   includeRaw: Boolean = false,
-  apiVersion: String = "2017-02-14"
+  apiVersion: String = "2018-02-28"
 ) {
   val httpExecutor = new Http()
   val baseReq = url("https://api.stripe.com/v1").secure.as(apiKey, "") <:<

@@ -48,7 +48,7 @@ class StripeExecutor(
   apiVersion: String = "2016-03-07"
 ) {
   val httpExecutor = Http.default
-  val baseReq = url("https://api.stripe.com/v1").secure.as(apiKey, "") <:<
+  val baseReq = url("https://api.stripe.com/v1").secure.as_!(apiKey, "") <:<
     Map("Stripe-Version" -> apiVersion, "User-Agent" -> ("streifen/" + BuildInfo.version))
   implicit val formats = DefaultFormats
 

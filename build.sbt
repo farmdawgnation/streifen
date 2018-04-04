@@ -12,8 +12,8 @@ libraryDependencies ++= {
     "net.liftweb"               %% "lift-common"          % liftVersion,
     "net.liftweb"               %% "lift-util"            % liftVersion,
     "net.liftweb"               %% "lift-json"            % liftVersion,
-    "net.databinder.dispatch"   %% "dispatch-core"        % "0.13.3",
-    "net.databinder.dispatch"   %% "dispatch-lift-json"   % "0.13.3",
+    "org.dispatchhttp"          %% "dispatch-core"        % "0.14.0",
+    "org.dispatchhttp"          %% "dispatch-lift-json"   % "0.14.0",
     "org.scalatest"             %% "scalatest"            % "3.0.5"        % "test"
   )
 }

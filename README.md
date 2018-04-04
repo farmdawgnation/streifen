@@ -23,7 +23,7 @@ Some things about Streifen:
 To get started with Streifen, add it to your library dependencies in your sbt buildfile!
 
 ```scala
-libraryDependencies += "me.frmr.stripe" %% "streifen" % "0.1.0"
+libraryDependencies += "me.frmr.stripe" %% "streifen" % "0.1.1"
 ```
 
 ## Using Streifen

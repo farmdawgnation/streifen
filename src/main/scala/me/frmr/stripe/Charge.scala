@@ -59,10 +59,10 @@ object Charge extends Listable[ChargeList] with Gettable[Charge] {
     receiptEmail: Option[String] = None,
     applicationFee: Option[Long] = None,
     metadata: Map[String, String] = Map.empty
-  )(implicit exec: StripeExecutor) = {
+  )(implicit exec: StripeExecutor): Future[Box[Charge]] = {
     (customer, card) match {
       case (None, None) =>
-        Failure("Either card or customer must be specified when creating a charge.")
+        Future(Failure("Either card or customer must be specified when creating a charge."))
 
       case _ =>
         val requiredParams = Map(

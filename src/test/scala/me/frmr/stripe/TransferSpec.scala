@@ -8,7 +8,7 @@ import me.frmr.stripe.StripeHelpers._
 
 import org.scalatest._
 
-class TransferSpec extends WordSpec with ShouldMatchers {
+class TransferSpec extends WordSpec with Matchers {
   implicit val formats = DefaultFormats
 
   "Transfer object" should {

@@ -8,7 +8,7 @@ import me.frmr.stripe.StripeHelpers._
 
 import org.scalatest._
 
-class SubscriptionItemSpec extends WordSpec with ShouldMatchers {
+class SubscriptionItemSpec extends WordSpec with Matchers {
   implicit val formats = DefaultFormats
 
   "SubscriptionItem object" should {

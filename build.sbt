@@ -4,10 +4,10 @@ version := "0.1.3-SNAPSHOT"
 
 organization := "me.frmr.stripe"
 
-scalaVersion := "2.12.4"
+scalaVersion := "2.12.7"
 
 libraryDependencies ++= {
-  val liftVersion = "3.2.0"
+  val liftVersion = "3.3.0"
   Seq(
     "net.liftweb"               %% "lift-common"          % liftVersion,
     "net.liftweb"               %% "lift-util"            % liftVersion,

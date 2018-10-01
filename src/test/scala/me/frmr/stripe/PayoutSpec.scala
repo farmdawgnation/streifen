@@ -8,7 +8,7 @@ import me.frmr.stripe.StripeHelpers._
 
 import org.scalatest._
 
-class PayoutSpec extends WordSpec with ShouldMatchers {
+class PayoutSpec extends WordSpec with Matchers {
   implicit val formats = DefaultFormats
 
   "Payout object" should {

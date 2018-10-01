@@ -8,7 +8,7 @@ import me.frmr.stripe.StripeHelpers._
 
 import org.scalatest._
 
-class TokenSpec extends WordSpec with ShouldMatchers {
+class TokenSpec extends WordSpec with Matchers {
   implicit val formats = DefaultFormats
 
   "Token object" should {
@@ -34,6 +34,7 @@ class TokenSpec extends WordSpec with ShouldMatchers {
             "dynamic_last4": null,
             "exp_month": 8,
             "exp_year": 2017,
+            "fingerprint": "jfYpjs0oYxBYKc4C",
             "funding": "credit",
             "last4": "4242",
             "metadata": {

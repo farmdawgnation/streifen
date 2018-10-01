@@ -8,7 +8,7 @@ import me.frmr.stripe.StripeHelpers._
 
 import org.scalatest._
 
-class PlanSpec extends WordSpec with ShouldMatchers {
+class PlanSpec extends WordSpec with Matchers {
   implicit val formats = DefaultFormats
 
   "Plan object" should {

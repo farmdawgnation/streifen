@@ -6,7 +6,7 @@ import net.liftweb.util._
 import net.liftweb.util.Helpers._
 
 import dispatch._, Defaults._
-import com.ning.http.client.Response
+import org.asynchttpclient.Response
 
 /**
  * Case class describing a raw response from Stripe, including
@@ -47,8 +47,8 @@ class StripeExecutor(
   includeRaw: Boolean = false,
   apiVersion: String = "2018-02-28"
 ) {
-  val httpExecutor = new Http()
-  val baseReq = url("https://api.stripe.com/v1").secure.as(apiKey, "") <:<
+  val httpExecutor = Http.default
+  val baseReq = url("https://api.stripe.com/v1").secure.as_!(apiKey, "") <:<
     Map("Stripe-Version" -> apiVersion, "User-Agent" -> ("streifen/" + BuildInfo.version))
   implicit val formats = DefaultFormats
 

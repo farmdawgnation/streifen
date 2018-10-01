@@ -1,22 +1,20 @@
 name := "streifen"
 
-version := "0.0.7-SNAPSHOT"
+version := "0.1.3-SNAPSHOT"
 
 organization := "me.frmr.stripe"
 
-scalaVersion := "2.11.12"
-
-resolvers += "Farmdawg Temp Forks" at "http://dl.bintray.com/farmdawgnation/temp-forks"
+scalaVersion := "2.12.4"
 
 libraryDependencies ++= {
-  val liftVersion = "2.6.3"
+  val liftVersion = "3.2.0"
   Seq(
     "net.liftweb"               %% "lift-common"          % liftVersion,
     "net.liftweb"               %% "lift-util"            % liftVersion,
     "net.liftweb"               %% "lift-json"            % liftVersion,
-    "net.databinder.dispatch"   %% "dispatch-core"        % "0.11.3",
-    "net.databinder.dispatch"   %% "dispatch-lift-json"   % "0.11.3",
-    "org.scalatest"             %% "scalatest"            % "2.2.6"        % "test"
+    "org.dispatchhttp"          %% "dispatch-core"        % "0.14.0",
+    "org.dispatchhttp"          %% "dispatch-lift-json"   % "0.14.0",
+    "org.scalatest"             %% "scalatest"            % "3.0.5"        % "test"
   )
 }
 

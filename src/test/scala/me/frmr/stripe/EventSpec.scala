@@ -8,7 +8,7 @@ import me.frmr.stripe.StripeHelpers._
 
 import org.scalatest._
 
-class EventSpec extends WordSpec with ShouldMatchers {
+class EventSpec extends WordSpec with Matchers {
   implicit val formats = DefaultFormats
 
   "Event object" should {

@@ -8,7 +8,7 @@ import me.frmr.stripe.StripeHelpers._
 
 import org.scalatest._
 
-class ChargeSpec extends WordSpec with ShouldMatchers {
+class ChargeSpec extends WordSpec with Matchers {
   implicit val formats = DefaultFormats
 
   "Charge object" should {

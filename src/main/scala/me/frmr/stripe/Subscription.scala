@@ -50,7 +50,7 @@ object Subscription extends ChildListable[SubscriptionList] with ChildGettable[S
     val params = List(
       Some(("plan", plan)),
       coupon.map(("coupon", _)),
-      trialEnd.map(trialEnd => ("trialEnd", trialEnd.toString)),
+      trialEnd.map(trialEnd => ("trial_end", trialEnd.toString)),
       card.map(("card", _)),
       quantity.map(quantity => ("quantity", quantity.toString)),
       applicationFeePercent.map(fee => ("application_fee_percent", fee.toString)),

@@ -36,6 +36,16 @@ case class SubscriptionList(
   def withRaw(raw: JValue) = this.copy(raw = Some(raw))
 }
 
+case class SubscriptionItemList(
+  data: List[SubscriptionItem],
+  hasMore: Boolean = false,
+  totalCount: Option[Int] = None,
+  url: String = "",
+  raw: Option[JValue] = None
+) extends StripeList[SubscriptionItem] {
+  def withRaw(raw: JValue) = this.copy(raw = Some(raw))
+}
+
 case class RefundList(
   data: List[Refund],
   hasMore: Boolean = false,
@@ -96,6 +106,16 @@ case class TransferList(
   def withRaw(raw: JValue) = this.copy(raw = Some(raw))
 }
 
+case class PayoutList(
+  data: List[Payout],
+  hasMore: Boolean = false,
+  totalCount: Option[Int] = None,
+  url: String = "",
+  raw: Option[JValue] = None
+) extends StripeList[Payout] {
+  def withRaw(raw: JValue) = this.copy(raw = Some(raw))
+}
+
 case class ChargeList(
   data: List[Charge],
   hasMore: Boolean = false,
@@ -113,6 +133,16 @@ case class PlanList(
   url: String = "",
   raw: Option[JValue] = None
 ) extends StripeList[Plan] {
+  def withRaw(raw: JValue) = this.copy(raw = Some(raw))
+}
+
+case class ProductList(
+  data: List[Product],
+  hasMore: Boolean = false,
+  totalCount: Option[Int] = None,
+  url: String = "",
+  raw: Option[JValue] = None
+) extends StripeList[Product] {
   def withRaw(raw: JValue) = this.copy(raw = Some(raw))
 }
 

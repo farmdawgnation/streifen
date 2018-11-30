@@ -18,11 +18,13 @@ case class Subscription(
   endedAt: Option[Long],
   trialStart: Option[Long],
   trialEnd: Option[Long],
+  billingCycleAnchor: Option[String],
   canceledAt: Option[Long],
   quantity: Option[Int],
   taxPercent: Option[Double],
   applicationFeePercent: Option[Int],
   discount: Option[Discount],
+  items: SubscriptionItemList,
   raw: Option[JValue]
 ) extends StripeObject {
   def withRaw(raw: JValue) = this.copy(raw = Some(raw))
@@ -41,15 +43,19 @@ object Subscription extends ChildListable[SubscriptionList] with ChildGettable[S
     quantity: Option[Int] = None,
     applicationFeePercent: Option[Double] = None,
     taxPercent: Option[Double] = None,
+    billingCycleAnchor: Option[Long] = None,
+    prorate: Option[Boolean] = None,
     metadata: Map[String, String] = Map.empty
   )(implicit exec: StripeExecutor): Future[Box[Subscription]] = {
     val params = List(
       Some(("plan", plan)),
       coupon.map(("coupon", _)),
-      trialEnd.map(trialEnd => ("trialEnd", trialEnd.toString)),
+      trialEnd.map(trialEnd => ("trial_end", trialEnd.toString)),
       card.map(("card", _)),
       quantity.map(quantity => ("quantity", quantity.toString)),
       applicationFeePercent.map(fee => ("application_fee_percent", fee.toString)),
+      billingCycleAnchor.map(anchor => ("billing_cycle_anchor", billingCycleAnchor.toString)),
+      prorate.map(protrate => ("prorate", protrate.toString)),
       taxPercent.map(taxPercent => ("tax_percent", taxPercent.toString))
     ).flatten.toMap ++ metadataProcessor(metadata)
 
@@ -63,6 +69,7 @@ object Subscription extends ChildListable[SubscriptionList] with ChildGettable[S
     plan: Option[String] = None,
     coupon: Option[String] = None,
     trialEnd: Option[Long] = None,
+    billingCycleAnchor: Option[String] = None,
     card: Option[String] = None,
     quantity: Option[Int] = None,
     taxPercent: Option[Double] = None,
@@ -74,6 +81,7 @@ object Subscription extends ChildListable[SubscriptionList] with ChildGettable[S
       plan.map(("plan", _)),
       coupon.map(("coupon", _)),
       trialEnd.map(trialEnd => ("trial_end", trialEnd.toString)),
+      billingCycleAnchor.map(billingCycleAnchor => ("billing_cycle_anchor", billingCycleAnchor)),
       card.map(("card", _)),
       quantity.map(quantity => ("quantity", quantity.toString)),
       applicationFeePercent.map(fee => ("application_fee_percent", fee.toString)),

@@ -41,11 +41,11 @@ case class Card(
 
 object Card extends ChildListable[CardList] with ChildGettable[Card] with ChildDeleteable {
   def baseResourceCalculator(req: Req, parentId: String) =
-    req / "customers" / parentId / "cards"
+    req / "customers" / parentId / "sources"
 
   def create(customerId: String, card: String)(implicit exec: StripeExecutor) = {
     val uri = baseResourceCalculator(exec.baseReq, customerId)
-    val params = Map("card" -> card)
+    val params = Map("source" -> card)
 
     exec.executeFor[Card](uri << params)
   }
